@@ -1,0 +1,32 @@
+import Vue from 'vue'
+import { sync } from 'vuex-router-sync'
+import App from './components/App'
+import router from './router'
+import store from './store'
+import 'jquery/src/jquery.js'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import { BootstrapVue, IconsPlugin, LayoutPlugin } from 'bootstrap-vue'
+import '../static/assets/scss/main.scss'
+
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+import Notifications from './plugins/notifications'
+window.$ = require('jquery')
+
+Vue.use(Notifications)
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+Vue.use(LayoutPlugin)
+Vue.component('v-select', vSelect)
+
+
+sync(store, router)
+
+const app = new Vue({
+  router,
+  store,
+  ...App
+})
+
+export { app, router, store }
