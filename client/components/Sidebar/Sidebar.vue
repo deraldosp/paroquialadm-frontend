@@ -24,8 +24,9 @@
         </span>
         
       </router-link>
-      
-      <span class="ml-2" v-if="sidebarOpened">{{ item.label }}</span>
+      <transition name="fade" mode="out-in">
+        <span class="ml-2" v-if="sidebarOpened">{{ item.label }}</span>
+      </transition>
       
     </div>
     <div>{{ mouseposition }}</div>
@@ -156,6 +157,13 @@
 }
 .container-logo {
   width: 59px;
+}
+
+.fade-enter-active  {
+  transition: opacity .5s;
+}
+.fade-enter {
+  opacity: 0;
 }
 
 </style>
