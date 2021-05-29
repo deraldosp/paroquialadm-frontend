@@ -104,13 +104,13 @@
             y = event.pageY
 
         if (this.sidebarOpen) {
-          if (x > 300 && x <= 330) {
+          if (x > 0 && x <= 330) {
             this.availableMenu = true
           } else {
             this.availableMenu = false
           }
         } else {
-          if (x > 80 && x <= 100) {
+          if (x > 0 && x <= 100) {
             this.availableMenu = true
           } else {
             this.availableMenu = false
