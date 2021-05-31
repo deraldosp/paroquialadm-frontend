@@ -25,7 +25,7 @@ export default {
   
   data() {
     return {
-      leftMenu: true
+      leftMenu: false
     }
   },
 
