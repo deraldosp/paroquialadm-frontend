@@ -1,8 +1,9 @@
 <template>
   <div class="sidebar" :class="[{ 'available': availableMenu }, { 'opened': sidebarOpen }]">
     <div class="sidebar-logo d-flex justify-content-start align-items-center">
-      <div class="container-logo" @click="goToHome()">
-        <div class="brand-logo mt-n3"><img class="img-fluid" src="/static/assets/images/brasao-arquidiocese.png" alt=""></div>
+      <div class="container-logo" :class="{ 'extended': sidebarOpened }" @click="goToHome()">
+        <div v-show="sidebarOpened" class="brand-logo mt-n3"><img class="img-fluid" src="/static/assets/images/brasao-arquidiocese-extended.png" alt=""></div>
+        <div v-show="!sidebarOpened" class="brand-logo mt-n3"><img class="img-fluid" src="/static/assets/images/brasao-arquidiocese.png" alt=""></div>
       </div>
     </div>
     <span @click="toggleSidebar()" id="btn-toggle" class="d-flex align-items-center" :class="{ 'available': availableMenu }">
@@ -15,7 +16,7 @@
     <ul 
       class="list-group mt-2"
     >
-      <li v-for="(item, index) in menuItems" :key="index" class="list-group-item p-0 mx-0 my-2 border-0">
+      <li v-for="(item, index) in menuItems" :key="index" class="li-menu list-group-item p-0 mx-0 my-2 border-0">
         
         <div class="d-flex flex-nowrap align-items-center">
           <router-link :to="item.href" class="nav-brand d-flex justify-content-center align-items-center">
@@ -31,7 +32,7 @@
             </router-link>
             
           </transition>
-        <span v-if="sidebarOpened" class="float-right" @click="toggleChildrenMenu(index)">abrir</span>
+        <span v-if="sidebarOpened && item.children.length > 0" class="arrow-toggable" :class="{ 'active': item.childrenVisible }" @click="toggleChildrenMenu(index)"></span>
         </div>
         
 
@@ -39,7 +40,7 @@
           <transition name="fade" mode="out-in">
             <b-collapse id="collapse-4" v-if="sidebarOpened" v-model="item.childrenVisible">
               <ul class="list-group ml-5">
-                <li class="list-group-item border-0" :key="subItem.href" v-for="subItem in item.children">
+                <li class="list-group-item border-0 mt-0 pt-0" :key="subItem.href" v-for="subItem in item.children">
                   <router-link  class="nav-text sub-item" :to="subItem.href">{{ subItem.label }}</router-link>
                 </li>
               </ul>
@@ -94,7 +95,8 @@
             icon: 'class',
             href: '/catequese',
             routerName: 'MAIN_CATEQUESE',
-            childrenVisible: false
+            childrenVisible: false,
+            children: []
           },
           {
             name: 'matrimonio',
@@ -102,7 +104,8 @@
             icon: 'attractions',
             href: '/matrimonio',
             routerName: 'MAIN_MATRIMONIO',
-            childrenVisible: false
+            childrenVisible: false,
+            children: []
           },
           {
             name: 'batismo',
@@ -110,7 +113,8 @@
             icon: 'child_care',
             href: '/batismo',
             routerName: 'MAIN_BATISMO',
-            childrenVisible: false
+            childrenVisible: false,
+            children: []
           }
         ]
       }
@@ -174,6 +178,14 @@
 </script>
 
 <style lang="scss" scoped>
+
+$orange: #f87000;
+
+.li-menu {
+  &:hover {
+    background: #fff5ec;
+  }
+}
 .nav-brand {
   text-decoration: none !important;
   width: 55px;
@@ -181,12 +193,12 @@
   border-radius: 15px;
   color: #555555;
   &.router-link-exact-active {
-    background-color: #f87000;
+    background-color: #{$orange};
     color: #fff;
   }
 
   &.router-link-active {
-    background-color: #f87000;
+    background-color: #{$orange};
     color: #fff;
   }
 }
@@ -195,11 +207,11 @@
   text-decoration: none;
   color: #555555;
   &.router-link-exact-active {
-    color: #f87000;
+    color: #{$orange};
     font-weight: 600;
   }
   &.router-link-active {
-    color: #f87000;
+    color: #{$orange};
   }
 
   &.sub-item {
@@ -215,7 +227,7 @@
   height: 30px;
   width: 20px;
   border-radius: 0px 18px 18px 0px;
-  background-color: #f87000;
+  background-color: #{$orange};
   visibility: hidden;
 
   &.available {
@@ -228,6 +240,9 @@
 }
 .container-logo {
   width: 59px;
+  &.extended {
+    width: 176px;
+  }
 }
 
 .fade-enter-active  {
@@ -235,6 +250,33 @@
 }
 .fade-enter {
   opacity: 0;
+}
+
+.arrow-toggable {
+  position: absolute;
+  right: 5px;
+  &:before {
+    content: '\e5cf';
+    font-family: "Material Icons";
+    font-size: 20px;
+    color: #555555;
+  };
+  
+  &.active {
+    &:before {
+      content: '\e5ce';
+      font-family: "Material Icons";
+      color: #5f5757;
+    }
+  }
+
+  &:hover {
+    &:before {
+      color: #{$orange};
+      cursor: pointer
+    }
+  }
+
 }
 
 </style>
