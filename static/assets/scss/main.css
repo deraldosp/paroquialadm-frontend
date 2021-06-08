@@ -50,9 +50,11 @@
   height: 80px;
   width: 100vw;
   padding-left: calc(80px + 15px);
+  padding-right: 30px;
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 999;
   background-color: #fff;
   -webkit-box-shadow: 0px 2px 15px 5px rgba(112, 112, 112, 0.15);
   box-shadow: 0px 2px 15px 5px rgba(112, 112, 112, 0.15);
@@ -65,6 +67,7 @@
   background-color: #f2faff;
   transition: all 0.2s linear;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .main-container.sidebar-visible {
@@ -141,7 +144,7 @@
   box-shadow: 6px 5px 18px 0px rgba(112, 112, 112, 0.15);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-device-width: 768px) {
   .sidebar {
     border-right: solid 1px #f8700075 !important;
   }

@@ -26,9 +26,11 @@ $default-padding: '15px';
   height: #{$margin-top} ;
   width: 100vw;
   padding-left: calc(#{$sidebar-size + #{$default-padding}});
+  padding-right: 30px;
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 999;
   background-color: #fff;
   -webkit-box-shadow: 0px 2px 15px 5px rgba(112,112,112,0.15); 
   box-shadow: 0px 2px 15px 5px rgba(112,112,112,0.15);
@@ -42,6 +44,7 @@ $default-padding: '15px';
   background-color: #f2faff;
   transition: all 0.2s linear;
   padding: 20px;
+  overflow-y: auto;
   
   &.sidebar-visible {
     margin-left: #{$sidebar-size};
