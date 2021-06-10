@@ -11,7 +11,7 @@
         <div class="w-50 d-flex justify-content-end">  
           <div class="h-100 d-flex align-items-center mr-3">
             <b-avatar variant="info" class="mr-2"></b-avatar>
-            <div>Deraldo Nascimento</div>
+            <!-- <div>Deraldo Nascimento</div> -->
           </div>
 
           <div class="btn btn-light rounded-circle mr-3">
