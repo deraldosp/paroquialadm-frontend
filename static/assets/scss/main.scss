@@ -34,6 +34,12 @@ $default-padding: '15px';
   background-color: #fff;
   -webkit-box-shadow: 0px 2px 15px 5px rgba(112,112,112,0.15); 
   box-shadow: 0px 2px 15px 5px rgba(112,112,112,0.15);
+  transition: all 0.2s linear;
+
+  &.menu-expanded {
+    padding-left: calc(#{$default-padding} + calc(#{$sidebar-size} + #{$menu-size}));
+  }
+  
 }
 
 .main-container {
@@ -132,6 +138,14 @@ $default-padding: '15px';
 
   #btn-toggle {
     visibility: visible !important;
+  }
+
+  .brandheader {
+    
+    &.menu-expanded {
+      padding-left: #{$default-padding};
+    }
+    
   }
 
   .main-container {

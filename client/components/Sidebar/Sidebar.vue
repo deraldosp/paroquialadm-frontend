@@ -37,7 +37,6 @@
         
 
         <div>
-          <transition name="fade" mode="out-in">
             <b-collapse id="collapse-4" v-if="sidebarOpened" v-model="item.childrenVisible">
               <ul class="list-group ml-5">
                 <li class="list-group-item border-0 mt-0 pt-0" :key="subItem.href" v-for="subItem in item.children">
@@ -45,7 +44,6 @@
                 </li>
               </ul>
             </b-collapse>
-          </transition>      
         </div>
       </li>
 
@@ -80,6 +78,13 @@
             routerName: 'MAIN_DIZIMO',
             childrenVisible: false,
             children: [
+              {
+                name: 'DizimoDashBoard',
+                label: 'Dashboard',
+                icon: '',
+                href: '/dizimo/dashboard',
+                routerName: 'DIZIMO_DASHBOARD'
+              },
               {
                 name: 'Dizimistas',
                 label: 'Dizimistas',
