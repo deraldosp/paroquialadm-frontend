@@ -61,6 +61,7 @@
         sidebarOpened: false,
         mouseposition: null,
         availableMenu: false,
+        posX: 0,
         menuItems: [
           // {
           //   name: 'Home',
@@ -71,7 +72,7 @@
           //   childrenVisible: false
           // },
           {
-            name: 'Dízimo',
+            name: 'dizimo',
             label: 'Dízimo',
             icon: 'real_estate_agent',
             href: '/dizimo',
@@ -86,7 +87,7 @@
                 routerName: 'DIZIMO_DASHBOARD'
               },
               {
-                name: 'Dizimistas',
+                name: 'dizimistas',
                 label: 'Dizimistas',
                 icon: '',
                 href: '/dizimo/dizimistas',
@@ -95,9 +96,9 @@
             ]
           },
           {
-            name: 'Catequese',
+            name: 'catequese',
             label: 'Catequese - Crisma',
-            icon: 'class',
+            icon: 'groups',
             href: '/catequese',
             routerName: 'MAIN_CATEQUESE',
             childrenVisible: false,
@@ -115,7 +116,7 @@
           {
             name: 'batismo',
             label: 'Batismo',
-            icon: 'child_care',
+            icon: 'water_drop',
             href: '/batismo',
             routerName: 'MAIN_BATISMO',
             childrenVisible: false,
@@ -134,6 +135,16 @@
         } else {
           this.sidebarOpened = false
         }
+      },
+      $route: {
+        deep: true,
+        handler: function(val) {
+          this.menuItems.map((item, index) => {
+            if (item.name.toLowerCase() != val.path.split('/')[1]) {
+              this.menuItems[index].childrenVisible = false
+            }
+          })
+        }
       }
     },
 
@@ -147,6 +158,8 @@
       $(document).on('mousemove', (event) => {
         let x = event.pageX,
             y = event.pageY
+
+        this.posX = event.pageX
 
         if (this.sidebarOpen) {
           if (x > 0 && x <= 330) {
@@ -174,6 +187,9 @@
 
       toggleSidebar() {
         this.$store.commit('SIDEBAR_TOGGLE')
+        if (this.posX > 100) {
+          this.availableMenu = false
+        }
       },
       toggleChildrenMenu(index) {
         this.menuItems[index].childrenVisible = !this.menuItems[index].childrenVisible
@@ -233,10 +249,13 @@ $orange: #f87000;
   width: 20px;
   border-radius: 0px 18px 18px 0px;
   background-color: #{$orange};
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s;
 
   &.available {
-    visibility: visible;
+    opacity: 1;
+    transition: opacity .5s;
+
   }
 
   &:hover {

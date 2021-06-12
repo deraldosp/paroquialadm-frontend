@@ -38,8 +38,27 @@ export default {
   methods: {
     toggleMenu() {
       this.leftMenu = !this.leftMenu
+    },
+
+    defineDeviceDisplay() {
+      window.addEventListener('resize', () => {
+        this.$store.commit('SET_DEVICE_DISPLAY')
+      })
     }
+  },
+
+  mounted() {
+    this.defineDeviceDisplay()
+  },
+  
+  updated() {
+    this.defineDeviceDisplay()
+  },
+
+  destroyed() {
+    window.removeEventListener('resize', this.defineDeviceDisplay)
   }
+
   
 }
 </script>
