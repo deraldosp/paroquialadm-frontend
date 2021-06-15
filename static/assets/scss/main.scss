@@ -27,6 +27,11 @@ $default-padding: '15px';
     margin-left: #{$sidebar-size};
     padding-left: calc(#{$sidebar-size} + #{$default-padding}) !important;    
   }
+
+  .pa-user-menu {
+    height: 100vh;
+    width: calc(100vw - calc(#{$sidebar-size} + 20px))
+  }  
 }
 
 body {
@@ -78,6 +83,34 @@ body {
     }
   }
 }
+
+.pa-user-menu {
+  position: fixed;
+  display: none;
+  right: 0;
+  top: 0;
+  width: 280px;
+  height: 150px;
+  background-color: #fff;
+  transition: all 0.2s linear;
+  
+  .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    &:before {
+      content: '\e5cd';
+      font-family: "Material Icons";
+      font-size: 20px;
+      color: #ffffff;
+    };
+  }
+  
+  &.show {
+    display: block;
+  }
+}
+
 
 .sidebar {
   padding: 10px;
@@ -164,6 +197,15 @@ body {
 @media only screen and (max-width: 768px) {
   
   @include mobile-brandheader;
+
+  body {
+	
+    overflow: hidden;
+    &::before {
+      content: "smartphone";
+      display: none;
+    }
+  }
 
   .main-container {
         

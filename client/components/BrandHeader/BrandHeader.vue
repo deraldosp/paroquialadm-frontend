@@ -9,24 +9,25 @@
 
 
         <div class="d-flex justify-content-end">  
-          <div class="h-100 d-flex align-items-center ml-2">
-            <b-avatar variant="info" id="user-menu" class="mr-2" v-b-popover.click></b-avatar>
+          <div class="h-100 d-flex align-items-center ml-2" @click="toggleUserMenu()">
+            <b-avatar variant="info" id="user-menu" class="mr-2"></b-avatar>
             <!-- <div>Deraldo Nascimento</div> -->
           </div>
-
-          <b-popover 
-            target="user-menu" 
-            custom-class="border-0 bg-transparent"
-            placement="bottomleft"
-          >
+          <div>
             <UserMenu></UserMenu>
-          </b-popover>
+          </div>
+          
 
           <template v-if="$store.state.currentDeviceDisplay !== 'smartphone'">
 
-            <div class="btn btn-light rounded-circle ml-2">
+            <div id="popo" class="btn btn-light rounded-circle ml-2">
               <span class="material-icons-round">notifications_none</span>
             </div>
+
+            <b-popover custom-class="shadow border-0" target="popo" triggers="hover" placement="top">
+              <template #title>Popover Title</template>
+              I am popover <b>component</b> content!
+            </b-popover>
 
             <div class="btn btn-light rounded-circle ml-2">
               <span class="material-icons">logout</span>
@@ -46,11 +47,21 @@
   export default {
     components: {
       UserMenu
+    },
+
+    methods: {
+      toggleUserMenu() {
+        console.log('tetas')
+        this.$store.commit('TOGGLE_USER_MENU')
+      }
     }
     
+
   }
 </script>
 
 <style lang="scss" scoped>
-
+.custom-popo {
+  
+}
 </style>

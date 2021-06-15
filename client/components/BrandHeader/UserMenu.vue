@@ -1,13 +1,16 @@
 <template>
-  <div class="user-menu">
-    <div class="user-menu-header d-flex justify-content-left align-items-end">
-      <div class="user-menu-avatar d-flex justify-content-center align-items-center">
-        <b-avatar variant="info" class="mr-2" size="5em"></b-avatar>
-      </div>
-      <div class="ml-3 text-white">Deraldo Nascimento</div>
+  <div class="pa-user-menu pa-animate-right shadow" :class="{'show': userMenuShow}">
+    <span class="close" @click="$parent.toggleUserMenu()"></span>
+    <div class="user-menu-header pb-2 d-flex justify-content-left align-items-end">
+      <div><b-avatar variant="light" size="2.5em"></b-avatar></div>
+      <div class="ml-2">Deraldo Nascimento</div>
     </div>
 
-    <div class="user-menu-body"></div>
+    <div class="user-menu-body p-2">
+      <div class="align-self-top float-right">
+        <i class="material-icons material-icons-outline" style="font-size: 2em">logout</i>
+      </div>
+    </div>
       
     
   </div>
@@ -15,42 +18,44 @@
 
 <script>
   export default {
-    
+    computed: {
+      userMenuShow() {
+        return this.$store.state.userMenu
+      }
+    }
   }
 </script>
 
 <style lang="scss" scoped>
-.user-menu {
-  $orange:  #e26600;
-  padding: 2px;
-  width: 400px;
-  height: 250px;
-  background: rgb(255,217,141);
-  background: linear-gradient(90deg, rgba(255,217,141,1) 0%, rgba(226,102,0,1) 100%);
 
-  .user-menu-body {
-    height: calc(100% - 80px);
-    width: 100%;
-    background: #fff;
-  }
-}
 
-.user-menu-header {
-  $orange:  #e26600;
-  height: 80px;
-  width: 100%;
-  background: transparent;
-  
-  .user-menu-avatar {
-    position: relative;
-    left: 20px;
-    width: 80px;
+.pa-user-menu {
+
+  .user-menu-header {
+    background-color: rgb(255, 102, 0);
+    padding-left: 15px;
+    color: #fff;
+    font-size: 20px;
     height: 80px;
-    background: transparent;
-    top: 30px;
+    
+    
   }
-  
+
 }
 
+.pa-animate-right{
+  // position:relative;
+  animation:animateright 0.4s
+}
+@keyframes animateright{
+  from{
+      right:-300px;
+      opacity:0
+  }
+   to{
+      right:0;
+      opacity:1
+  }
+}
 
 </style>

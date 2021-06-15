@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const state = {
   count: 0,
   sidebarOpen: false,
-  currentDeviceDisplay: 'desktop'
+  currentDeviceDisplay: 'desktop',
+  userMenu: false
 }
 
 const mutations = {
@@ -26,7 +27,15 @@ const mutations = {
       .replace(/"/g, '')
       console.log(currentDeviceDisplay)
       state.currentDeviceDisplay = currentDeviceDisplay
+  },
+  TOGGLE_USER_MENU (state, payload) {
+    if (payload) {
+      state.userMenu = payload
+    } else {
+      state.userMenu = !state.userMenu
+    }
   }
+
 }
 
 const actions = {
