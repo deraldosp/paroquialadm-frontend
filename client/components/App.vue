@@ -49,14 +49,21 @@ export default {
 
   mounted() {
     this.defineDeviceDisplay()
+    window.addEventListener('click', () => {
+      this.$root.$emit('closeUserMenu')
+    })
   },
   
   updated() {
     this.defineDeviceDisplay()
+    window.addEventListener('click', () => {
+      this.$root.$emit('closeUserMenu')
+    })
   },
 
   destroyed() {
     window.removeEventListener('resize', this.defineDeviceDisplay)
+    window.removeEventListener('closeUserMenu')
   }
 
   

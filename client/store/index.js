@@ -34,6 +34,10 @@ const mutations = {
     } else {
       state.userMenu = !state.userMenu
     }
+  },
+
+  CLOSE_USER_MENU (state) {
+    state.userMenu = false
   }
 
 }

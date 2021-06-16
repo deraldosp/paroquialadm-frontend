@@ -30,6 +30,16 @@
       userMenuShow() {
         return this.$store.state.userMenu
       }
+    },
+
+    mounted() {
+      this.$root.$on('closeUserMenu', () => {
+        this.$store.commit('CLOSE_USER_MENU')
+      })
+
+      $('.pa-user-menu').click(event => {
+        event.stopPropagation();
+      })
     }
   }
 </script>

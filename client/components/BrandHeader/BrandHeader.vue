@@ -9,7 +9,7 @@
 
 
         <div class="d-flex justify-content-end">  
-          <div class="h-100 d-flex align-items-center ml-2 pointer" @click="toggleUserMenu()">
+          <div id="btn-user-menu" class="h-100 d-flex align-items-center ml-2 pointer" @click="toggleUserMenu()">
             <b-avatar variant="info" id="user-menu" class="mr-2">DN</b-avatar>
             <!-- <div>Deraldo Nascimento</div> -->
           </div>
@@ -54,6 +54,12 @@
         console.log('tetas')
         this.$store.commit('TOGGLE_USER_MENU')
       }
+    },
+
+    mounted() {
+      $('#btn-user-menu').click(event => {
+        event.stopPropagation();
+      })
     }
     
 

@@ -18,7 +18,7 @@
     >
       <li v-for="(item, index) in menuItems" :key="index" class="li-menu list-group-item p-0 mx-0 my-2 border-0">
         
-        <div class="d-flex flex-nowrap align-items-center">
+        <div class="item-menu d-flex flex-nowrap align-items-center">
           <router-link :to="item.href" class="nav-brand d-flex justify-content-center align-items-center">
             
             <span v-b-tooltip.right.hover :title="!sidebarOpen? item.label: ''" class="material-icons-outlined md-30">
@@ -203,8 +203,10 @@
 $orange: #f87000;
 
 .li-menu {
-  &:hover {
-    background: #fcf0e6;
+  .item-menu{
+    &:hover {
+      background: #fcf0e6;
+    }
   }
 }
 .nav-brand {
