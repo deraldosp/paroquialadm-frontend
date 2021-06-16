@@ -1,14 +1,22 @@
 <template>
-  <div class="pa-user-menu pa-animate-right shadow" :class="{'show': userMenuShow}">
+  <div class="pa-user-menu " :class="{'show': userMenuShow}">
     <span class="close" @click="$parent.toggleUserMenu()"></span>
-    <div class="user-menu-header pb-2 d-flex justify-content-left align-items-end">
-      <div><b-avatar variant="light" size="2.5em"></b-avatar></div>
-      <div class="ml-2">Deraldo Nascimento</div>
+    <div class="user-menu-header pb-2 d-flex justify-content-left align-items-center">
+      <div class="ml-3">
+        <div>
+          <b-avatar variant="info" size="2.2em">DN</b-avatar></div>
+        </div>
+        <div class="ml-3" style="line-height: 0.9em">
+          <div class="p-0">Deraldo Nascimento</div>
+          <div><small class="p-0 text-muted">deraldosp@gmail.com</small></div>
+        </div>
     </div>
 
-    <div class="user-menu-body p-2">
-      <div class="align-self-top float-right">
-        <i class="material-icons material-icons-outline" style="font-size: 2em">logout</i>
+    <div class="user-menu-body ml-2">
+      <div class="align-self-top ml-2">
+        <div class="small">Gerenciar Perfil</div>
+        <div class="small">Solicitar ajuda</div>
+        <div class="small">Sair do sistema</div>
       </div>
     </div>
       
@@ -27,21 +35,6 @@
 </script>
 
 <style lang="scss" scoped>
-
-
-.pa-user-menu {
-
-  .user-menu-header {
-    background-color: rgb(255, 102, 0);
-    padding-left: 15px;
-    color: #fff;
-    font-size: 20px;
-    height: 80px;
-    
-    
-  }
-
-}
 
 .pa-animate-right{
   // position:relative;

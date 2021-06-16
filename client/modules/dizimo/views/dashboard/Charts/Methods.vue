@@ -16,7 +16,7 @@ import VueApexCharts from 'vue-apexcharts'
         series: [60, 30, 6, 4],
         chartOptions: {
           labels: ["Dinheiro", "Depósito", "Cartão", "Cheque"],
-          // colors: ["#FCB9AA","#ECEAE4", "#FFDBCC", "#A2E1DB", "#55CBCD"],
+          colors: ["#E0A228","#34E089", "#E06B1D", "#0762E0", "#E02812"],
           chart: {
             type: 'donut',
           },

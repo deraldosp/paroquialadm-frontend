@@ -204,7 +204,7 @@ $orange: #f87000;
 
 .li-menu {
   &:hover {
-    background: #fff5ec;
+    background: #fcf0e6;
   }
 }
 .nav-brand {

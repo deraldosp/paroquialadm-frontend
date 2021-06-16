@@ -9,8 +9,8 @@
 
 
         <div class="d-flex justify-content-end">  
-          <div class="h-100 d-flex align-items-center ml-2" @click="toggleUserMenu()">
-            <b-avatar variant="info" id="user-menu" class="mr-2"></b-avatar>
+          <div class="h-100 d-flex align-items-center ml-2 pointer" @click="toggleUserMenu()">
+            <b-avatar variant="info" id="user-menu" class="mr-2">DN</b-avatar>
             <!-- <div>Deraldo Nascimento</div> -->
           </div>
           <div>
@@ -61,7 +61,7 @@
 </script>
 
 <style lang="scss" scoped>
-.custom-popo {
-  
+.pointer {
+  cursor: pointer;
 }
 </style>

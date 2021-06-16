@@ -95,14 +95,34 @@ body::before {
 }
 
 .pa-user-menu {
-  position: fixed;
+  border-radius: 5px;
+  -webkit-box-shadow: -1px 10px 11px 4px rgba(0, 0, 0, 0.23);
+  box-shadow: -1px 10px 11px 4px rgba(0, 0, 0, 0.23);
+  background: white;
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  margin: 0px;
   display: none;
-  right: 0;
-  top: 0;
-  width: 280px;
-  height: 150px;
-  background-color: #fff;
-  transition: all 0.2s linear;
+  list-style: none;
+  z-index: 2;
+  min-width: 360px;
+  will-change: opacity, transform;
+  opacity: 0;
+  visibility: visible;
+  transform: scale(0.95);
+  transition: visibility 0.2s cubic-bezier(0.2, 0.91, 0.85, 0.96) 0s, opacity 0.2s cubic-bezier(0.2, 0.91, 0.85, 0.96) 0s, transform 0.2s cubic-bezier(0.2, 0.91, 0.85, 0.96) 0s;
+}
+
+.pa-user-menu .user-menu-header {
+  padding-left: 15px;
+  font-size: 16px;
+  height: 80px;
+}
+
+.pa-user-menu .user-menu-body {
+  padding: 0px 15px 25px 15px;
+  line-height: 1.6em;
 }
 
 .pa-user-menu .close {
@@ -115,11 +135,13 @@ body::before {
   content: '\e5cd';
   font-family: "Material Icons";
   font-size: 20px;
-  color: #ffffff;
+  color: #464646;
 }
 
 .pa-user-menu.show {
   display: block;
+  opacity: 1;
+  transform: scale(1);
 }
 
 .sidebar {
@@ -140,7 +162,7 @@ body::before {
 }
 
 .sidebar.available {
-  border-right: solid 1px #f8700075;
+  border-right: solid 1px #f870004b;
 }
 
 .sidebar.opened {
@@ -204,7 +226,7 @@ body::before {
     padding-left: calc(80px + 15px) !important;
   }
   .pa-user-menu {
-    height: 100vh;
+    right: 10px;
     width: calc(100vw - calc(80px + 20px));
   }
   body {
@@ -226,7 +248,7 @@ body::before {
 
 @media only screen and (max-device-width: 768px) {
   .sidebar {
-    border-right: solid 1px #f8700075 !important;
+    border-right: solid 1px #f870004b !important;
   }
   #btn-toggle {
     opacity: 1 !important;
