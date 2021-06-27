@@ -29,7 +29,7 @@
               I am popover <b>component</b> content!
             </b-popover>
 
-            <div class="btn btn-light rounded-circle ml-2">
+            <div @click="logout()" class="btn btn-light rounded-circle ml-2">
               <span class="material-icons">logout</span>
             </div>
 
@@ -53,6 +53,11 @@
       toggleUserMenu() {
         console.log('tetas')
         this.$store.commit('TOGGLE_USER_MENU')
+      },
+      logout() {
+        this.$store.dispatch('logout').then(() => {
+          this.$router.push({ name: 'LOGIN' })
+        })
       }
     },
 

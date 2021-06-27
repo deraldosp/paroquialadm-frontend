@@ -5,44 +5,76 @@ import MainDizimo from 'modules/dizimo/views/mainDizimo'
 import Dizimistas from 'modules/dizimo/views/dizimistas'
 import DizimoDashboard from 'modules/dizimo/views/dashboard'
 import MainBatismo from 'modules/batismo/views/mainBatismo'
-import Mainfinanceiro from 'modules/financeiro/views/mainFinanceiro'
+import MainFinanceiro from 'modules/financeiro/views/mainFinanceiro'
+import Login from 'views/Login'
+import Store from '../store'
 
 Vue.use(Router)
+
+
+const isAuthenticated = () => {
+  return Store.state.logged
+}
+
+const guard = (to, from , next) => {
+  if (to.name !== 'LOGIN' && !isAuthenticated()) next({ name: 'LOGIN' })
+  // if the user is not authenticated, `next` is called twice
+  next()
+}
+
+
 
 export default new Router({
   mode: 'history',
   routes: [
     {
       path: '/',
-      component: Home
+      component: Home,
+      beforeEnter: guard
+    
+    },
+    {
+      path: '/login',
+      component: Login,
+      name: 'LOGIN',
     },
     {
       path: '/dizimo',
       component: MainDizimo,
       redirect: '/dizimo/dashboard',
       name: 'MAIN_DIZIMO',
+      beforeEnter: guard
+    ,
       children: [
         {
           path: '/dizimo/dashboard',
           component: DizimoDashboard,
-          name: 'DASHBOARD_DIZIMO'
+          name: 'DASHBOARD_DIZIMO',
+          beforeEnter: guard
+        
         },
         {
           path: '/dizimo/dizimistas',
           component: Dizimistas,
-          name: 'DIZIMISTAS'
+          name: 'DIZIMISTAS',
+          beforeEnter: guard
+        
         }
       ]
     },
     {
       path: '/financeiro',
-      component: Mainfinanceiro,
-      children: []
+      component: MainFinanceiro,
+      children: [],
+      beforeEnter: guard
+    
     },
     {
       path: '/batismo',
       component: MainBatismo,
-      children: []
+      children: [],
+      beforeEnter: guard
+    
     }
   ]
 })

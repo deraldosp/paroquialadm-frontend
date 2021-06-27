@@ -42,6 +42,8 @@
     "axios": "^0.21.1",
     "babel-runtime": "^6.18.0",
     "bootstrap-vue": "^2.21.2",
+    "dotenv": "^10.0.0",
+    "lottie-vuejs": "^0.4.0",
     "promise-polyfill": "^6.0.2",
     "vue": "^2.6.0",
     "vue-apexcharts": "^1.6.1",

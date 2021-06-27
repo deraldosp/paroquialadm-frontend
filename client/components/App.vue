@@ -6,7 +6,9 @@
     </div>  
     <left-menu></left-menu>
     <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }">
-      <router-view></router-view>
+      <div :class="{'login-view': $route.name == 'LOGIN'}">
+        <router-view></router-view>
+      </div>
     </div>
     <b-button class="btn-teste" @click="toggleMenu()">aperte</b-button>
   </div>
@@ -16,6 +18,7 @@
 import LeftMenu from 'components/LeftMenu'
 import Sidebar from 'components/Sidebar'
 import BrandHeader from 'components/BrandHeader'
+import { mapState } from 'vuex'
 export default {
   components: {
     LeftMenu,
@@ -30,9 +33,11 @@ export default {
   },
 
   computed: {
+    ...mapState(['logged']),
     sidebarOpen() {
       return this.$store.state.sidebarOpen
-    }
+    },
+    
   },
 
   methods: {
@@ -98,5 +103,14 @@ body {
   position: fixed;
   bottom: 0;
   right: 20px;
+}
+
+.login-view {
+  position: fixed;
+  z-index: 999999999;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
 }
 </style>
