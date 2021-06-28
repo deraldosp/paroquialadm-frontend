@@ -14,16 +14,30 @@ import 'vue-select/dist/vue-select.css';
 import Notifications from './plugins/notifications'
 window.$ = require('jquery')
 
+import i18n from './config/I18n'
+import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate/dist/vee-validate.full'
+
 Vue.use(Notifications)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(LayoutPlugin)
 Vue.component('v-select', vSelect)
 
+const components = [
+  { name: 'ValidationProvider', path: ValidationProvider },
+  { name: 'ValidationObserver', path: ValidationObserver },
+  { name: 'v-select', path: vSelect }
+]
+
+components.map(({ name, path }) => {
+  Vue.component(name, path)
+})
+
 
 sync(store, router)
 
 const app = new Vue({
+  i18n,
   router,
   store,
   ...App

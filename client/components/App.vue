@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <BrandHeader></BrandHeader>
-    <div>
+    <BrandHeader v-if="$route.name != 'LOGIN'"></BrandHeader>
+    <div v-if="$route.name != 'LOGIN'">
       <Sidebar></Sidebar> 
     </div>  
     <left-menu></left-menu>
@@ -107,7 +107,7 @@ body {
 
 .login-view {
   position: fixed;
-  z-index: 999999999;
+  z-index: 1050;
   width: 100vw;
   height: 100vh;
   left: 0;

@@ -1,14 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import i18n from '../config/I18n'
 
 Vue.use(Vuex)
+var authData
 
 let loginState = () => {
-  if (localStorage.getItem('jwt')) {
+  if (localStorage.getItem('authData')) {
+    authData = localStorage.getItem('authData')
     return true
   } else {
     return false
   }
+}
+
+let getUserData = () => {
+  if (authData) {
+    return JSON.parse(atob(authData)).user
+  }
+  return null
 }
 
 const state = {
@@ -17,7 +27,24 @@ const state = {
   currentDeviceDisplay: 'desktop',
   userMenu: false,
   logged: loginState(),
-  user: null
+  user: getUserData(),
+  languages: [
+    { 
+      lang: 'pt_br',
+      name: i18n.t('PORTUGUESE'),
+      brand: '/static/assets/images/brasil.png'
+    },
+    { 
+      lang: 'es',
+      name: i18n.t('SPANISH'),
+      brand: '/static/assets/images/espanha.png'
+    },
+    { 
+      lang: 'en',
+      name: i18n.t('ENGLISH'),
+      brand: '/static/assets/images/estados-unidos.png'
+    }
+  ]
 }
 
 const mutations = {
@@ -51,12 +78,18 @@ const mutations = {
   },
 
   LOGIN (state, payload) {
+
+    let authData = btoa(JSON.stringify(payload))
+    localStorage.setItem('authData', authData)
+    
+    localStorage.setItem('jwt', payload.access_token)
     state.logged = true
-    state.user = payload
+    state.user = payload.user
   },
 
   LOGOUT (state) {
     state.logged = false
+    localStorage.removeItem('authData')
     localStorage.removeItem('jwt')
   }
 
