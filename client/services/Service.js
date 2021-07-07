@@ -1,13 +1,12 @@
-import Axios from 'axios'
+import axios from 'axios'
 
 const baseURL = process.env.HOST_API
 
 const Service = (config) => {
-
-  
+ 
   if (localStorage.getItem('jwt')) {
 
-    jwtToken = localStorage.getItem('jwt')
+    let jwtToken = localStorage.getItem('jwt')
     
     const headers = {
       'Content-Type': 'application/json',
@@ -20,9 +19,9 @@ const Service = (config) => {
       headers
     })
   
-    return service
+    return http
   }
 
 }
 
-export default service
+export default Service
