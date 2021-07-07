@@ -80,13 +80,8 @@ export default {
 @import 'bootstrap/scss/bootstrap.scss';
 body {
   margin: 0;
-  font-size: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont,
-               'avenir next', avenir,
-               helvetica, 'helvetica neue',
-               Ubuntu,
-               'segoe ui', arial,
-               sans-serif;
+  font-size: 0.95rem;
+  font-family: 'Nunito', sans-serif;
   background-color: #e0f2ff;
 }
 .page {
