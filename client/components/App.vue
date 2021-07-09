@@ -5,12 +5,12 @@
       <Sidebar></Sidebar> 
     </div>  
     <left-menu></left-menu>
-    <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }">
+    <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }" style="overflow-y: hidden">
       <div :class="{'login-view': $route.name == 'LOGIN'}">
         <router-view></router-view>
       </div>
     </div>
-    <b-button class="btn-teste" @click="toggleMenu()">aperte</b-button>
+    <!-- <b-button class="btn-teste" @click="toggleMenu()">aperte</b-button> -->
   </div>
 </template>
 

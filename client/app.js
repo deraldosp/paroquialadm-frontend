@@ -3,16 +3,21 @@ import { sync } from 'vuex-router-sync'
 import App from './components/App'
 import router from './router'
 import store from './store'
+
 import 'jquery/src/jquery.js'
+window.$ = require('jquery')
+
 import 'bootstrap/dist/js/bootstrap.min.js'
 import { BootstrapVue, IconsPlugin, LayoutPlugin } from 'bootstrap-vue'
 import '../static/assets/scss/main.scss'
-
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 import Notifications from './plugins/notifications'
-window.$ = require('jquery')
+
+import InfiniteLoading from 'vue-infinite-loading'
+Vue.use(InfiniteLoading, {})
 
 import i18n from './config/I18n'
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate/dist/vee-validate.full'
