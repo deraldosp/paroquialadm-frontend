@@ -19,6 +19,7 @@ import LeftMenu from 'components/LeftMenu'
 import Sidebar from 'components/Sidebar'
 import BrandHeader from 'components/BrandHeader'
 import { mapState } from 'vuex'
+import parseJwt from 'helpers/ParseJwt'
 export default {
   components: {
     LeftMenu,
@@ -28,7 +29,9 @@ export default {
   
   data() {
     return {
-      leftMenu: false
+      leftMenu: false,
+      tokenTimer: 0,
+      dateNow: null
     }
   },
 
@@ -57,6 +60,23 @@ export default {
     window.addEventListener('click', () => {
       this.$root.$emit('closeUserMenu')
     })
+
+    this.tokenTimer = setInterval(() => {
+      let expires = parseJwt(localStorage.getItem(jwt)).exp
+      let now = this.$DateTime.now().toFormat('X')
+
+      let diff = expires - now
+      
+      if (diff < 120000) {
+        if (diff < 0) {
+          // todo: redirect to login
+        }
+        // todo: refresh token
+      } 
+    }, 60000)
+
+    
+
   },
   
   updated() {

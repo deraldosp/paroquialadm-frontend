@@ -27,6 +27,13 @@
     methods: {
       
     },
+
+    computed: {
+      valida() {
+        return  !!this.inputFocus
+      }
+    },
+
     watch: {
       search(val) {
         this.isSearching = true
@@ -35,7 +42,7 @@
           this.$emit('search', val)
           clearInterval(this.time)
           this.isSearching = false
-        }, 2000)
+        }, 1000)
       },
     }
   }

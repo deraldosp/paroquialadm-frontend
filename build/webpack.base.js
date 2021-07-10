@@ -28,7 +28,8 @@ module.exports = {
       root: path.join(__dirname, '../client'),
       components: path.join(__dirname, '../client/components'),
       modules: path.join(__dirname, '../client/modules'),
-      services: path.join(__dirname, '../client/services')
+      services: path.join(__dirname, '../client/services'),
+      helpers: path.join(__dirname, '../client/helpers')
     },
     modules: [
       _.cwd('node_modules'),

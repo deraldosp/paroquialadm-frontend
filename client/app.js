@@ -20,8 +20,10 @@ import InfiniteLoading from 'vue-infinite-loading'
 Vue.use(InfiniteLoading, {})
 
 import i18n from './config/I18n'
-import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate/dist/vee-validate.full'
+import { ValidationProvider, ValidationObserver, extend, configure, localize } from 'vee-validate/dist/vee-validate.full'
+import Luxon from 'root/config/Luxon'
 
+Vue.use(Luxon)
 Vue.use(Notifications)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
