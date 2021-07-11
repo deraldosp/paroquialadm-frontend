@@ -12,11 +12,20 @@ export default {
       email,
       password
     }
-
     const response = await axios.post(`${baseURL}/auth/login`, userCredentials, config)
-    
     if (response.status == 200) {
       return response.data
     } 
+  },
+
+  async refresh (token) {
+    let headers = {
+      "Authorization": `Bearer ${token}`,
+      ...config
+    }
+
+    const response = await axios.post(`${baseURL}/auth/refresh`, {}, { headers })
+
+    return response
   }
 }

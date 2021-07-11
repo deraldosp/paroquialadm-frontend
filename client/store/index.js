@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import i18n from '../config/I18n'
+import AuthService from 'services/auth.service'
 
 Vue.use(Vuex)
 var authData
@@ -28,6 +29,7 @@ const state = {
   userMenu: false,
   logged: loginState(),
   user: getUserData(),
+  jwt: null,
   languages: [
     { 
       lang: 'pt_br',
@@ -83,6 +85,7 @@ const mutations = {
     localStorage.setItem('authData', authData)
     
     localStorage.setItem('jwt', payload.access_token)
+    state.jwt = payload.access_token
     state.logged = true
     state.user = payload.user
   },
@@ -92,8 +95,6 @@ const mutations = {
     localStorage.removeItem('authData')
     localStorage.removeItem('jwt')
   }
-
-  
 
 }
 
@@ -110,6 +111,14 @@ const actions = {
 
   logout({ commit }) {
     commit('LOGOUT')
+  },
+
+  refreshToken({ commit }, token) {
+    AuthService.refresh(token).then(res => {
+      if (res.status == 200) {
+        commit('LOGIN', res.data)
+      }
+    })
   }
 }
 

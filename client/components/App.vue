@@ -5,7 +5,7 @@
       <Sidebar></Sidebar> 
     </div>  
     <left-menu></left-menu>
-    <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }" style="overflow-y: hidden">
+    <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }">
       <div :class="{'login-view': $route.name == 'LOGIN'}">
         <router-view></router-view>
       </div>
@@ -20,6 +20,7 @@ import Sidebar from 'components/Sidebar'
 import BrandHeader from 'components/BrandHeader'
 import { mapState } from 'vuex'
 import parseJwt from 'helpers/ParseJwt'
+
 export default {
   components: {
     LeftMenu,
@@ -52,6 +53,28 @@ export default {
       window.addEventListener('resize', () => {
         this.$store.commit('SET_DEVICE_DISPLAY')
       })
+    },
+
+    checkToken() {
+      if (localStorage.getItem('jwt') && this.$store.state.logged) {
+        let expires = parseJwt(localStorage.getItem('jwt')).exp
+        let now = this.$DateTime.now().toFormat('X')
+  
+        console.log('tetas',expires, now)
+        let diff = expires - now
+        
+        // se diferença o timestamp do token e timestamp atual form menor que dois minutos
+        if (diff < 120) {
+          // diferença do timestamp negativa indica token já expirado, necessário login manual
+          if (diff < 0) {
+            this.$store.dispatch('logout').then(()=>{
+              $router.push({ name: 'LOGIN'})
+            })
+          }
+          // renova o token
+          this.$store.dispatch('refreshToken', localStorage.getItem('jwt'))
+        } 
+      }      
     }
   },
 
@@ -61,22 +84,10 @@ export default {
       this.$root.$emit('closeUserMenu')
     })
 
+    // verifica o token a cada 1 minuto
     this.tokenTimer = setInterval(() => {
-      let expires = parseJwt(localStorage.getItem(jwt)).exp
-      let now = this.$DateTime.now().toFormat('X')
-
-      let diff = expires - now
-      
-      if (diff < 120000) {
-        if (diff < 0) {
-          // todo: redirect to login
-        }
-        // todo: refresh token
-      } 
-    }, 60000)
-
-    
-
+      this.checkToken()
+    }, 60000)   
   },
   
   updated() {

@@ -4,7 +4,7 @@
       <div class="h-100 d-flex align-items-center">
         
         <div class="d-flex flex-fill justify-content-center px-4">
-          <b-input placeholder="Busca" style="border-radius: 20px"></b-input>
+          <b-input v-model="search" placeholder="Busca" style="border-radius: 20px"></b-input>
         </div>
 
 
@@ -49,6 +49,12 @@
       UserMenu
     },
 
+    data() {
+      return {
+        search: ''
+      }
+    },
+
     methods: {
       toggleUserMenu() {
         console.log('tetas')
@@ -65,6 +71,17 @@
       $('#btn-user-menu').click(event => {
         event.stopPropagation();
       })
+    },
+    watch: {
+      search(val) {
+        this.isSearching = true
+        clearInterval(this.time)
+        this.time = setInterval(() => {
+          this.$root.$emit('globalSearchFromHeader', val)
+          clearInterval(this.time)
+          this.isSearching = false
+        }, 1000)
+      },
     }
     
 

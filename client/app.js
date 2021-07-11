@@ -13,7 +13,8 @@ import '../static/assets/scss/main.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import vSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
+import "vue-select/src/scss/vue-select.scss";
+
 import Notifications from './plugins/notifications'
 
 import InfiniteLoading from 'vue-infinite-loading'
@@ -21,7 +22,7 @@ Vue.use(InfiniteLoading, {})
 
 import i18n from './config/I18n'
 import { ValidationProvider, ValidationObserver, extend, configure, localize } from 'vee-validate/dist/vee-validate.full'
-import Luxon from 'root/config/Luxon'
+import Luxon from 'root/plugins/Luxon'
 
 Vue.use(Luxon)
 Vue.use(Notifications)
