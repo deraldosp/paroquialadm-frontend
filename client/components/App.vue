@@ -5,7 +5,7 @@
       <Sidebar></Sidebar> 
     </div>  
     <left-menu></left-menu>
-    <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }">
+    <div class="main-container sidebar-visible" :class="{ 'menu-expanded': sidebarOpen   }" style="overflow: hidden">
       <div :class="{'login-view': $route.name == 'LOGIN'}">
         <router-view></router-view>
       </div>

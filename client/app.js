@@ -22,6 +22,7 @@ Vue.use(InfiniteLoading, {})
 
 import i18n from './config/I18n'
 import { ValidationProvider, ValidationObserver, extend, configure, localize } from 'vee-validate/dist/vee-validate.full'
+import BaseView from 'components/BaseView'
 import Luxon from 'root/plugins/Luxon'
 
 Vue.use(Luxon)
@@ -34,7 +35,8 @@ Vue.component('v-select', vSelect)
 const components = [
   { name: 'ValidationProvider', path: ValidationProvider },
   { name: 'ValidationObserver', path: ValidationObserver },
-  { name: 'v-select', path: vSelect }
+  { name: 'v-select', path: vSelect },
+  { name: 'BaseView', path: BaseView }
 ]
 
 components.map(({ name, path }) => {

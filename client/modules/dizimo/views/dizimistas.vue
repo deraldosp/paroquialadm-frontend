@@ -1,5 +1,13 @@
 <template>
-  <div>
+  <BaseView>
+    <template #header>
+      <div class="px-3 w-100 h-100 d-flex align-items-center">
+        <div>
+          <h5>Dizimistas</h5>
+        </div>
+      </div>
+    </template>
+
     <b-container fluid>
         <FloatSearch @search="filterParoquianos"></FloatSearch>
       <div>
@@ -10,14 +18,15 @@
         >
         <template v-slot:cell(actions)="{ item }">
           <b-button variant="primary" class="rounded-circle">
-            <span class="fas fa-edit"></span>
+            <span @click="editParoquiano(item)" class="fas fa-edit"></span>
           </b-button>
         </template>
         </b-table>
         <infinite-loading :identifier="resetState" @infinite="infiniteHandler"></infinite-loading>
       </div>
     </b-container>
-  </div>
+  </BaseView>
+  
 </template>
 
 <script>

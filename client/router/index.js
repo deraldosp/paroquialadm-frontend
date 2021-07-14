@@ -8,12 +8,13 @@ import MainBatismo from 'modules/batismo/views/mainBatismo'
 import MainFinanceiro from 'modules/financeiro/views/mainFinanceiro'
 import Login from 'views/Login'
 import Store from '../store'
+import loginExpires from 'root/helpers/CheckJwtExpires'
 
 Vue.use(Router)
 
 
 const isAuthenticated = () => {
-  return Store.state.logged
+  return !loginExpires(localStorage.getItem('jwt'))
 }
 
 const guard = (to, from , next) => {
