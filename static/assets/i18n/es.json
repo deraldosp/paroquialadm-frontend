@@ -3,5 +3,11 @@
   "PORTUGUESE": "Portugués",
   "ENGLISH": "Inglés",
   "SPANISH": "Español",
-  "ENTER": "Entrar"
+  "ENTER": "Entrar",
+  "SEARCH": "Buscar",
+  "CODE": "Código",
+  "NAME": "Nombre",
+  "PHONE": "Teléfono",
+  "CELPHONE": "Teléfono móvil",
+  "ACTIONS": "Acción"
 }

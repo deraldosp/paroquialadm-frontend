@@ -1,15 +1,17 @@
 <template>
   <BaseView>
     <template #header>
-      <div class="px-3 w-100 h-100 d-flex align-items-center">
+      <div class="px-3 w-100 h-100 d-flex align-items-center justify-content-between">
         <div>
-          <h5>Dizimistas</h5>
+          <h5>{{ $t('Dizimistas') }}</h5>
+        </div>
+        <div>
+          <b-button @click="createDizimista()" variant="primary"><i class="fas fa-plus mr-2"></i>{{ $t('NEW')}}</b-button>
         </div>
       </div>
     </template>
 
     <b-container fluid>
-        <FloatSearch @search="filterParoquianos"></FloatSearch>
       <div>
         <b-table
           hover
@@ -31,12 +33,10 @@
 
 <script>
   import { Paroquianos } from 'services/dizimo.service'
-  import FloatSearch from 'components/FloatSearch'
 
   export default {
     components: {
-      Paroquianos,
-      FloatSearch
+      Paroquianos
     },
 
     data() {
@@ -119,6 +119,10 @@
         this.listParoquianos = []
         this.page = 1
         this.resetState++
+      },
+
+      createDizimista() {
+        this.$router.push({name: 'DIZIMISTAS_EDIT'})
       }
     }
   }

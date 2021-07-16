@@ -50,7 +50,7 @@
       
     </ul>
     
-    <div>{{ mouseposition }}</div>
+    <!-- <div>{{ mouseposition }}</div> -->
   </div>
 </template>
 

@@ -4,7 +4,10 @@ import Home from '../views/Home'
 import MainDizimo from 'modules/dizimo/views/mainDizimo'
 import Dizimistas from 'modules/dizimo/views/dizimistas'
 import DizimoDashboard from 'modules/dizimo/views/dashboard'
+import DizimistasEdit from 'root/views/Paroquianos/EditFormParoquiano'
+
 import MainBatismo from 'modules/batismo/views/mainBatismo'
+import BatismoAgenda from 'modules/batismo/views/Agenda'
 import MainFinanceiro from 'modules/financeiro/views/mainFinanceiro'
 import Login from 'views/Login'
 import Store from '../store'
@@ -59,8 +62,13 @@ export default new Router({
           component: Dizimistas,
           name: 'DIZIMISTAS',
           beforeEnter: guard
-        
-        }
+        },
+        {
+          path: '/dizimo/dizimistas/new',
+          component: DizimistasEdit,
+          name: 'DIZIMISTAS_EDIT',
+          beforeEnter: guard
+        },
       ]
     },
     {
@@ -74,8 +82,17 @@ export default new Router({
       path: '/batismo',
       component: MainBatismo,
       children: [],
-      beforeEnter: guard
-    
+      beforeEnter: guard,
+      redirect: '/batismo/agenda',
+      children: [
+        {
+          path: '/batismo/agenda',
+          component: BatismoAgenda,
+          name: 'DASHBOARD_DIZIMO',
+          beforeEnter: guard
+        
+        }
+      ]
     }
   ]
 })

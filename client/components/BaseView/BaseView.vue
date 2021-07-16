@@ -54,7 +54,7 @@ $bv_footer_height: 30;
 $bv_padding: 25;
 
 .base-view {
-  
+  background-color: #fff;
 }
 
 .base-view-header {
