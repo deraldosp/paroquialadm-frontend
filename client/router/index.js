@@ -88,7 +88,7 @@ export default new Router({
         {
           path: '/batismo/agenda',
           component: BatismoAgenda,
-          name: 'DASHBOARD_DIZIMO',
+          name: 'DASHBOARD_BATISMO',
           beforeEnter: guard
         
         }
