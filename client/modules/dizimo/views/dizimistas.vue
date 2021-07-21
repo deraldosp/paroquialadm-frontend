@@ -122,7 +122,7 @@
       },
 
       createDizimista() {
-        this.$router.push({name: 'DIZIMISTAS_EDIT'})
+        this.$router.push({name: 'DIZIMISTAS_NEW'})
       }
     }
   }

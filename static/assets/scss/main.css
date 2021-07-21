@@ -205,8 +205,8 @@ body::before {
   border-radius: 20px;
   background-color: white;
   padding: 15px;
-  -webkit-box-shadow: 6px 5px 18px 0px rgba(112, 112, 112, 0.15);
-  box-shadow: 6px 5px 18px 0px rgba(112, 112, 112, 0.15);
+  -webkit-box-shadow: 6px 5px 18px 0px rgba(112, 112, 112, 0.25);
+  box-shadow: 6px 5px 18px 0px rgba(112, 112, 112, 0.25);
 }
 
 .pa-card ::-webkit-scrollbar-track {

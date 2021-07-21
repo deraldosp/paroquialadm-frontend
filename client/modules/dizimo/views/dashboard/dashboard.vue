@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="">
+  <BaseView headerHidden :bgColor="'transparent'">
+    <div>
 
-      <div class="row align-items-start">
+      <div class="row mx-0 align-items-start">
         <div class="col-sm-12 col-md-4 col-lg-4 col-sm-6 mb-3">
           <div class="pa-card" style="height: 200px !important"><Target></Target></div>
         </div>
@@ -14,30 +14,38 @@
         </div>
       </div>
 
-      <div class="row mt-2">
+      <div class="row mx-0 mt-2">
         <div class="col-sm-12 col-lg-8 mb-3">
           <div class="pa-card py-3">
-            <FloatSearch @search="filterParoquianos"></FloatSearch>
-            <div class="my-0 first-list">
-              <b-list-group>
-                <b-list-group-item v-for="(paroquiano, index) in listParoquianos" :key="index">{{ paroquiano.name }}</b-list-group-item>
-              </b-list-group>
-              <infinite-loading :identifier="resetState" @infinite="infiniteHandler"></infinite-loading>
+            <div class="d-flex first-list">
+              <ButtonDashboard 
+                @click="createDizimista()"
+                :title="$t('ADD_TITHE')" 
+                classIcon="fas fa-user-plus"
+              ></ButtonDashboard>
             </div>
           </div>
         </div>
         <div class="col-sm-12 col-lg-4 mb-3">
           <div class="pa-card">
-            <div class="my-0 first-list">
+            <div class="my-0">
               <b-list-group>
-                <b-list-group-item v-for="n in 11" :key="n">Lista item {{ n }}</b-list-group-item>
+                <div class="">
+                  <FloatSearch @search="filterParoquianos"></FloatSearch>
+                  <div class="my-0 first-list">
+                    <b-list-group>
+                      <b-list-group-item style="font-size: 14px" v-for="(paroquiano, index) in listParoquianos" :key="index">{{ paroquiano.name }}</b-list-group-item>
+                    </b-list-group>
+                    <infinite-loading :identifier="resetState" @infinite="infiniteHandler"></infinite-loading>
+                  </div>
+                </div>
               </b-list-group>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </BaseView>
 </template>
 
 <script>
@@ -46,13 +54,15 @@ import Methods from './Charts/Methods'
 import BalanceSheet from './Charts/BalanceSheet'
 import { Paroquianos } from 'services/dizimo.service'
 import FloatSearch from 'components/FloatSearch'
+import ButtonDashboard from 'components/ButtonDashboard'
 
   export default {
     components: {
       Target,
       Methods,
       BalanceSheet,
-      FloatSearch
+      FloatSearch,
+      ButtonDashboard
     },
 
     data() {
@@ -97,9 +107,13 @@ import FloatSearch from 'components/FloatSearch'
         this.filter = {
           name: val
         }
-          this.listParoquianos = []
-          this.page = 1
-          this.resetState++
+        this.listParoquianos = []
+        this.page = 1
+        this.resetState++
+      },
+
+      createDizimista() {
+        this.$router.push({name: 'DIZIMISTAS_NEW'})
       }
     }
   }
@@ -110,4 +124,6 @@ import FloatSearch from 'components/FloatSearch'
   height: calc(100vh - 380px);
   overflow: hidden auto;
 }
+
+
 </style>

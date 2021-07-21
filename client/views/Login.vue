@@ -41,7 +41,7 @@
                         <span class="material-icons-outlined">lock</span>
                       </div>
                     </template>
-                    <b-form-input type="password" v-model="loginData.password" placeholder="password"></b-form-input>
+                    <b-form-input @keypress.enter="login()" type="password" v-model="loginData.password" placeholder="password"></b-form-input>
                   </b-input-group>
                   <small class="text-danger">{{ errors[0] }}</small>
                 </ValidationProvider>

@@ -52,8 +52,8 @@
 .float-filter {
   position: absolute;
   float: left;
-  top: 20px;
-  left: calc(100% - 360px);
+  top: 0px;
+  right: 18px;
   z-index: 1;
   opacity: 50%;
 

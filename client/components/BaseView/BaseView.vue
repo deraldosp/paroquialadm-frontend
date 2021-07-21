@@ -1,5 +1,5 @@
 <template>
-  <div class="base-view">
+  <div class="base-view" :style="`background-color: ${bgColor}`">
     
     <div v-if="!headerHidden" class="base-view-header">
       <slot name="header"></slot>
@@ -27,7 +27,11 @@
         default: false
       },
       titleContent: String,
-      footerContent: String
+      footerContent: String,
+      bgColor: {
+        type: String,
+        default: '#fff'
+      }
     },
 
     computed: {
@@ -53,10 +57,6 @@ $bv_header_height: 70;
 $bv_footer_height: 30;
 $bv_padding: 25;
 
-.base-view {
-  background-color: #fff;
-}
-
 .base-view-header {
   width: 100%;
   height: #{$bv_header_height+'px'};
@@ -64,7 +64,8 @@ $bv_padding: 25;
   flex-direction: row;
   // background-color: cyan;
   padding: 0px;
-  overflow: hidden auto;
+  overflow-y: hidden auto;
+  overflow-x: hidden;
   border-bottom: solid 0.15em rgb(202, 202, 202);
   
 }

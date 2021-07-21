@@ -32,5 +32,6 @@
   "SINGLE": "Solteiro",
   "MARRIED": "Casado",
   "WIDOWER": "Viúvo",
-  "DIVORCED": "Divorciado"
+  "DIVORCED": "Divorciado",
+  "ADD_TITHE": "Novo Dizimista"
 }

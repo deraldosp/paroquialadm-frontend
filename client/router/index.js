@@ -23,6 +23,8 @@ const isAuthenticated = () => {
 const guard = (to, from , next) => {
   if (to.name !== 'LOGIN' && !isAuthenticated()) next({ name: 'LOGIN' })
   // if the user is not authenticated, `next` is called twice
+  console.log(from)
+  Store.dispatch('setLastPage', from.name)
   next()
 }
 
@@ -32,12 +34,14 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      name: 'HOME',
       path: '/',
       component: Home,
       beforeEnter: guard
     
     },
     {
+      name: 'LOGIN',
       path: '/login',
       component: Login,
       name: 'LOGIN',
@@ -66,12 +70,13 @@ export default new Router({
         {
           path: '/dizimo/dizimistas/new',
           component: DizimistasEdit,
-          name: 'DIZIMISTAS_EDIT',
+          name: 'DIZIMISTAS_NEW',
           beforeEnter: guard
         },
       ]
     },
     {
+      name: 'MAIN_FINANCEIRO',
       path: '/financeiro',
       component: MainFinanceiro,
       children: [],
@@ -79,6 +84,7 @@ export default new Router({
     
     },
     {
+      name: 'MAIN_BATISMO',
       path: '/batismo',
       component: MainBatismo,
       children: [],
@@ -86,6 +92,7 @@ export default new Router({
       redirect: '/batismo/agenda',
       children: [
         {
+          name: 'DASHBOARD_BATISMO',
           path: '/batismo/agenda',
           component: BatismoAgenda,
           name: 'DASHBOARD_BATISMO',

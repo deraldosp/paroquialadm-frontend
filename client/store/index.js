@@ -24,6 +24,7 @@ let getUserData = () => {
 
 const state = {
   count: 0,
+  lastRoutedPage: 'HOME',
   sidebarOpen: false,
   currentDeviceDisplay: 'desktop',
   userMenu: false,
@@ -94,6 +95,10 @@ const mutations = {
     state.logged = false
     localStorage.removeItem('authData')
     localStorage.removeItem('jwt')
+  },
+
+  SET_LAST_ROUTED_PAGE (state, payload) {
+    state.lastRoutedPage = payload
   }
 
 }
@@ -119,6 +124,10 @@ const actions = {
         commit('LOGIN', res.data)
       }
     })
+  },
+
+  setLastPage({ commit }, payload) {
+    commit('SET_LAST_ROUTED_PAGE', payload)
   }
 }
 

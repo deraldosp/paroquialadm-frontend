@@ -8,13 +8,13 @@
             <h5>{{ $t('Cadastro de Dizimistas') }}</h5>
           </div>
           <div class="d-flex">
-            <b-button class="mr-2" size="sm" @click="backToList()" variant="outline-secondary"><i class="fas fa-chevron-left mr-2"></i>{{ $t('BACK')}}</b-button>
+            <b-button class="mr-2" size="sm" @click="back()" variant="outline-secondary"><i class="fas fa-chevron-left mr-2"></i>{{ $t('BACK')}}</b-button>
             <b-button size="sm" @click="saveDizimista()" variant="primary"><i class="far fa-save mr-2"></i>{{ $t('SAVE')}}</b-button>
           </div>
         </div>
       </template>
 
-      <div class="row m-0">
+      <div class="row m-0 mb-5">
         <div class="col-lg-3 col-sm-12 menu-dizimista">
           <b-list-group>
             <b-list-group-item 
@@ -227,7 +227,14 @@
             label: this.$t('Dados Pastorais'),
           }
         ],
+        
         activeNavItem: 1,
+        loading: {
+          states: false,
+          cities: false,
+          saving: false
+        },
+
         form: {
           type: "A",
           name: null,
@@ -245,7 +252,7 @@
           phone: null,
           celphone: null,
           email: null,
-          print_label: false,
+          print_label: this.$route.name == 'DIZIMISTAS_NEW'? true : false,
           sortition_participant: true,
           status: null
         },
@@ -320,14 +327,16 @@
         console.log('tetas')
       },
 
-      backToList() {
-        this.$router.push({ name: 'DIZIMISTAS' })
+      back() {
+        this.$router.push({ name: this.$store.state.lastRoutedPage })
       },
 
       getStates() {
+        this.loading.states = true
         Geo.getStates().then(res => {
           if (res.status = 200) {
             this.states = res.data
+            this.loading.states = false
           }
         })
       },
