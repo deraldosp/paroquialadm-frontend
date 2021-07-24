@@ -34,7 +34,7 @@
                   <FloatSearch @search="filterParoquianos"></FloatSearch>
                   <div class="my-0 first-list">
                     <b-list-group>
-                      <b-list-group-item style="font-size: 14px" v-for="(paroquiano, index) in listParoquianos" :key="index">{{ paroquiano.name }}</b-list-group-item>
+                      <b-list-group-item @dblclick="editDizimista(paroquiano.id)" style="font-size: 14px" v-for="(paroquiano, index) in listParoquianos" :key="index">{{ paroquiano.name }}</b-list-group-item>
                     </b-list-group>
                     <infinite-loading :identifier="resetState" @infinite="infiniteHandler"></infinite-loading>
                   </div>
@@ -110,6 +110,10 @@ import ButtonDashboard from 'components/ButtonDashboard'
         this.listParoquianos = []
         this.page = 1
         this.resetState++
+      },
+
+      editDizimista(id) {
+        this.$router.push({name: 'DIZIMISTAS_EDIT', params: { id }})
       },
 
       createDizimista() {

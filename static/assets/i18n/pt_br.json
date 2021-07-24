@@ -29,9 +29,9 @@
   "STATE": "Estado",
   "CITY": "Cidade",
   "EMAIL": "E-mail",
-  "SINGLE": "Solteiro",
-  "MARRIED": "Casado",
-  "WIDOWER": "Viúvo",
-  "DIVORCED": "Divorciado",
+  "SINGLE": "Solteiro(a)",
+  "MARRIED": "Casado(a)",
+  "WIDOWER": "Viúvo(a)",
+  "DIVORCED": "Divorciado(a)",
   "ADD_TITHE": "Novo Dizimista"
 }

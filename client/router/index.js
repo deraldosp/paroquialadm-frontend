@@ -73,6 +73,13 @@ export default new Router({
           name: 'DIZIMISTAS_NEW',
           beforeEnter: guard
         },
+        {
+          path: '/dizimo/dizimistas/:id',
+          component: DizimistasEdit,
+          name: 'DIZIMISTAS_EDIT',
+          props: true,
+          beforeEnter: guard
+        },
       ]
     },
     {

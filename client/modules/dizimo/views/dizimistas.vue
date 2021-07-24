@@ -20,7 +20,7 @@
         >
         <template v-slot:cell(actions)="{ item }">
           <b-button variant="primary" class="rounded-circle">
-            <span @click="editParoquiano(item)" class="fas fa-edit"></span>
+            <span @click="editParoquiano(item.id)" class="fas fa-edit"></span>
           </b-button>
         </template>
         </b-table>
@@ -88,6 +88,11 @@
     },
 
     methods: {
+      editParoquiano(id) {
+        console.log(id)
+        this.$router.push({ name: 'DIZIMISTAS_EDIT', params: { id: id }})
+      },
+
       infiniteHandler($state) {
         this.getParoquianos($state)
       },

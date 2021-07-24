@@ -5,7 +5,7 @@
       <template #header>
         <div class="px-3 w-100 h-100 d-flex align-items-center justify-content-between">
           <div>
-            <h5>{{ $t('Cadastro de Dizimistas') }}</h5>
+            <h5>{{ $t('Cadastro de Dizimistas') }}  <span v-if="id" class="ml-3 p-2 badge badge-secondary">#{{ id }}</span></h5>
           </div>
           <div class="d-flex">
             <b-button class="mr-2" size="sm" @click="back()" variant="outline-secondary"><i class="fas fa-chevron-left mr-2"></i>{{ $t('BACK')}}</b-button>
@@ -42,7 +42,7 @@
               <div v-show="activeNavItem == 1">
 
                 <div class="row mt-3">
-                  <div class="col-lg-6 col-sm-12">
+                  <div class="col-lg-4 col-sm-12">
                     <label for="">{{ $t('TYPE') }}</label>
                     <ValidationProvider :name="$t('TYPE')" rules="required" v-slot="{ errors }">
                       <v-select :options="types" v-model="form.type" :reduce="item => item.value"></v-select>
@@ -58,6 +58,13 @@
                   <div class="col-lg-3 col-sm-6">
                     <label for="">{{ $t('SORTITION_PARTICIPANT') }}</label>
                     <b-form-checkbox v-model="form.sortition_participant" switch size="lg"></b-form-checkbox>
+                  </div>
+
+                  <div class="col-lg-2 col-sm-5">
+                    <div class="badge badge-secondary badge-pill" style="width: 100px">
+                      <!-- <h4 class="my-2"># {{ id }}</h4> -->
+                    </div>
+
                   </div>
                 </div>
                 
@@ -94,13 +101,13 @@
                   <div class="col-lg-4 col-sm-12">
                     <label for="">{{ $t('MARITAL_STATUS') }}</label>
                     <ValidationProvider :name="$t('MARITAL_STATUS')" vid="marital_status">
-                      <v-select :options="weddingStatus" v-model="form.wedding_status" :reduce="item => item.value"></v-select>
+                      <v-select :options="weddingStatus" v-model="form.marital_status_id" :reduce="item => item.value"></v-select>
                     </ValidationProvider>
                   </div>
 
                   <div class="col-lg-4 col-sm-12">
                     <label for="">{{ $t('WEDDING_DATE') }}</label>
-                    <ValidationProvider :name="$t('WEDDING_DATE')" rules="required_if:marital_status,C" v-slot="{ errors }">
+                    <ValidationProvider :name="$t('WEDDING_DATE')" rules="required_if:marital_status,2" v-slot="{ errors }">
                     <div>
                       <date-pick
                           v-model="form.wedding_date"
@@ -157,7 +164,7 @@
                       :options="states" 
                       v-model="form.state" 
                       label="name" 
-                      :reduce="item => item.id"
+                      :reduce="item => item.abbreviation"
                       @input="getCities"
                       ></v-select>
                   </div>
@@ -168,7 +175,7 @@
                       :options="cities" 
                       v-model="form.city" 
                       label="name" 
-                      :reduce="item => item.id"
+                      :reduce="item => item.name"
                       ></v-select>
                   </div>
                 </div>
@@ -205,7 +212,15 @@
 
 <script>
   import { Geo } from 'services/general.service'
+  import { Paroquianos } from 'services/dizimo.service'
+
   export default {
+    props: {
+      id: {
+        type: Number,
+        require: false
+      }
+    },
 
     data() {
       return {
@@ -236,11 +251,11 @@
         },
 
         form: {
-          type: "A",
+          type: 1,
           name: null,
           birth: null,
           gender: null,
-          marital_status: null,
+          marital_status_id: null,
           wedding_date: null,
           address_1: null,
           address_2: null,
@@ -271,11 +286,11 @@
         return [
           { 
             label: this.$t("ADULT"),
-            value: "A"
+            value: 1
           },
           {
             label: this.$t("CHILD"),
-            value: "C"
+            value: 2
           }
         ]
       },
@@ -296,26 +311,32 @@
         return [
           { 
             label: this.$t("SINGLE"),
-            value: "S"
+            value: 1
           },
           {
             label: this.$t("MARRIED"),
-            value: "C"
+            value: 2
           },
           {
             label: this.$t("WIDOWER"),
-            value: "V"
+            value: 3
           },
           {
             label: this.$t("DIVORCED"),
-            value: "D"
+            value: 4
           }
         ]
       }
     },
 
     mounted () {
-      this.getStates()
+      if (!this.id) {
+        this.getStates()
+      }
+
+      if (this.id) {
+        this.getDizimista(this.id)
+      }
     },
 
     methods: {
@@ -323,12 +344,19 @@
         this.activeNavItem = item_id
       },
 
-      saveDizimista() {
-        console.log('tetas')
-      },
-
       back() {
         this.$router.push({ name: this.$store.state.lastRoutedPage })
+      },
+      
+      getDizimista(id) {
+        Paroquianos.get(id).then(async res => {
+          this.form = res.data
+          await this.getStates()
+          setTimeout(() => {
+            this.getCities(res.data.state)
+            
+          }, 500)
+        })
       },
 
       getStates() {
@@ -341,8 +369,10 @@
         })
       },
 
-      getCities(state_id) {
-        if (state_id) {
+      getCities(abbr) {
+        if (abbr) {
+          let state_id = this.states.find(item => item.abbreviation == abbr).id
+
           Geo.getCities(state_id).then(res => {
             if (res.status == 200) {
               this.cities = res.data
@@ -352,6 +382,30 @@
           this.cities = []
           this.form.city = null
         }
+      },
+
+      saveDizimista() {
+        this.$refs.observer.validate().then(success => {
+          if (!success) {
+            return false
+          }
+
+          if (this.id) {
+            Paroquianos.update(this.id, this.form).then(res => {
+              if (res.status == 200) {
+                this.$notify({
+                  msg: "Salvo com sucesso!",
+                  type: 'success'
+                })
+              }
+            })
+          } else {
+            // todo: novo dizimista
+          }
+
+
+
+        })
       }
     }
     
