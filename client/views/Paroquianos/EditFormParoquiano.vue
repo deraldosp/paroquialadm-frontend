@@ -8,7 +8,7 @@
             <h5>{{ $t('Cadastro de Dizimistas') }}  <span v-if="id" class="ml-3 p-2 badge badge-secondary">#{{ id }}</span></h5>
           </div>
           <div class="d-flex">
-            <b-button class="mr-2" size="sm" @click="back()" variant="outline-secondary"><i class="fas fa-chevron-left mr-2"></i>{{ $t('BACK')}}</b-button>
+            <b-button class="mr-2" size="sm" @click="goBack()" variant="outline-secondary"><i class="fas fa-chevron-left mr-2"></i>{{ $t('BACK')}}</b-button>
             <b-button size="sm" @click="saveDizimista()" variant="primary"><i class="far fa-save mr-2"></i>{{ $t('SAVE')}}</b-button>
           </div>
         </div>
@@ -344,8 +344,8 @@
         this.activeNavItem = item_id
       },
 
-      back() {
-        this.$router.push({ name: this.$store.state.lastRoutedPage })
+      goBack() {
+        window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
       },
       
       getDizimista(id) {
@@ -400,7 +400,16 @@
               }
             })
           } else {
-            // todo: novo dizimista
+            Paroquianos.create(this.form).then(res => {
+              if (res.status == 201) {
+                this.$notify({
+                  msg: "Salvo com sucesso!",
+                  type: 'success'
+                })
+
+                this.$router.push({ name: 'DIZIMISTAS_EDIT', params: { id: res.data.id }})
+              }
+            })
           }
 
 

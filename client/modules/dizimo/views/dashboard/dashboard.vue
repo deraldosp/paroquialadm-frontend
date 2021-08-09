@@ -16,15 +16,74 @@
 
       <div class="row mx-0 mt-2">
         <div class="col-sm-12 col-lg-8 mb-3">
-          <div class="pa-card py-3">
-            <div class="d-flex first-list">
-              <ButtonDashboard 
-                @click="createDizimista()"
-                :title="$t('ADD_TITHE')" 
-                classIcon="fas fa-user-plus"
-              ></ButtonDashboard>
-            </div>
-          </div>
+          <b-row>
+            <b-col col xl="6" lg="12" sm="12" class="mt-2">
+              <DateCard/>
+              
+            </b-col>
+            <b-col col lg="6" sm="12" class="mt-2">
+              <b-card bg-variant="info" text-variant="white" header="Lançamentos Missa" class="text-center">
+                <b-card-text>
+                  <div>
+                    25/07/2021 - 07:30
+                  </div>
+                  <b-button size="sm" variant="light">Registrar</b-button>
+                </b-card-text>
+              </b-card>
+            </b-col>
+          
+           
+            <b-col col lg="6" sm="12" class="mt-2">
+              <b-card bg-variant="warning" header="Lançamento Missa" class="text-center">
+                <b-card-text>
+                  <div>
+                    25/07/2021 - 09:30
+                  </div>
+                  <b-button size="sm" variant="light">Registrar</b-button>
+                </b-card-text>
+              </b-card>
+            </b-col>
+            <b-col col lg="6" sm="12" class="mt-2">
+              <b-card bg-variant="success" text-variant="white" header="Lançamento Missa" class="text-center">
+                <b-card-text>
+                  <div>
+                    25/07/2021 - 18:30
+                  </div>
+                  <b-button size="sm" variant="light">Registrar</b-button>
+                </b-card-text>
+              </b-card>
+            </b-col>
+          
+           
+            <b-col col lg="6" sm="12" class="mt-2">
+              <b-card bg-variant="info" text-variant="white" header="Lançamentos Secretaria" class="text-center">
+                <b-card-text>
+                  <div>
+                    Devoluções de dizimo na Secretaria
+                  </div>
+                  <b-row>
+                    <b-col class="d-flex justify-content-center" cols="7">
+                      <date-pick v-model="dateLancSecretaria"></date-pick>
+                    </b-col>
+                    <b-col class="d-flex justify-content-center aling-items-center" cols="5">
+                      <b-button size="sm" variant="light">Registrar</b-button>
+                    </b-col>
+                  </b-row>                 
+                  
+                </b-card-text>
+              </b-card>
+            </b-col>
+            <b-col col lg="6" sm="12" class="mt-2">
+              <b-card bg-variant="danger" text-variant="white" header="Success" class="text-center">
+                <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+              </b-card>
+            </b-col>
+          </b-row>
+          <!-- <ButtonDashboard 
+            @click="createDizimista()"
+            :title="$t('ADD_TITHE')" 
+            classIcon="fas fa-user-plus"
+          ></ButtonDashboard> -->
         </div>
         <div class="col-sm-12 col-lg-4 mb-3">
           <div class="pa-card">
@@ -55,6 +114,7 @@ import BalanceSheet from './Charts/BalanceSheet'
 import { Paroquianos } from 'services/dizimo.service'
 import FloatSearch from 'components/FloatSearch'
 import ButtonDashboard from 'components/ButtonDashboard'
+import DateCard from 'components/DateCard'
 
   export default {
     components: {
@@ -62,11 +122,13 @@ import ButtonDashboard from 'components/ButtonDashboard'
       Methods,
       BalanceSheet,
       FloatSearch,
-      ButtonDashboard
+      ButtonDashboard,
+      DateCard
     },
 
     data() {
       return {
+        dateLancSecretaria: null,
         listParoquianos: [],
         loading: false,
         page: 1,

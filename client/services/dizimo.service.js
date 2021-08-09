@@ -10,5 +10,13 @@ export const Paroquianos = {
 
   update: (id, data) => {
     return Service().put(`${BaseUrl}/${id}`, data)
+  },
+
+  create: (data) => {
+    return Service().post(`${BaseUrl}`, data)
+  },
+
+  delete: (id) => {
+    return Service().delete(`${BaseUrl}/${id}`)
   }
 }
