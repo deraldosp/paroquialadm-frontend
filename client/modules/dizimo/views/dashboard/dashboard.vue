@@ -17,33 +17,28 @@
       <div class="row mx-0 mt-2">
         <div class="col-sm-12 col-lg-8 mb-3">
           <b-row>
-            <b-col col xl="6" lg="12" sm="12" class="mt-2">
-              <DateCard/>
+            <b-col col xl="6" lg="12" sm="12" class="mt-1">
+              <DateCard @dateChanged="lancamentos" :editable="false" time="07:30" :title="'Missa 07:30'">
+                Registro de pagamento de dízimo por missa
+              </DateCard>
               
             </b-col>
-            <b-col col lg="6" sm="12" class="mt-2">
-              <b-card bg-variant="info" text-variant="white" header="Lançamentos Missa" class="text-center">
-                <b-card-text>
-                  <div>
-                    25/07/2021 - 07:30
-                  </div>
-                  <b-button size="sm" variant="light">Registrar</b-button>
-                </b-card-text>
-              </b-card>
+            <b-col col lg="6" sm="12" class="mt-1">
+              <DateCard variant="success" :editable="true" :title="'Secretaria'">
+                <small>
+                  Dízimo recebido na secretaria, com cartão, depósito ou cheque.
+                </small>
+              </DateCard>
             </b-col>
           
            
-            <b-col col lg="6" sm="12" class="mt-2">
-              <b-card bg-variant="warning" header="Lançamento Missa" class="text-center">
-                <b-card-text>
-                  <div>
-                    25/07/2021 - 09:30
-                  </div>
-                  <b-button size="sm" variant="light">Registrar</b-button>
-                </b-card-text>
-              </b-card>
+            <b-col col lg="6" sm="12" class="mt-1">
+              <DateCard :editable="false" time="09:30" :title="'Missa 09:30'">
+                Registro de pagamento de dízimo por missa
+              </DateCard>
             </b-col>
-            <b-col col lg="6" sm="12" class="mt-2">
+            
+            <b-col col lg="6" sm="12" class="mt-1">
               <b-card bg-variant="success" text-variant="white" header="Lançamento Missa" class="text-center">
                 <b-card-text>
                   <div>
@@ -55,25 +50,12 @@
             </b-col>
           
            
-            <b-col col lg="6" sm="12" class="mt-2">
-              <b-card bg-variant="info" text-variant="white" header="Lançamentos Secretaria" class="text-center">
-                <b-card-text>
-                  <div>
-                    Devoluções de dizimo na Secretaria
-                  </div>
-                  <b-row>
-                    <b-col class="d-flex justify-content-center" cols="7">
-                      <date-pick v-model="dateLancSecretaria"></date-pick>
-                    </b-col>
-                    <b-col class="d-flex justify-content-center aling-items-center" cols="5">
-                      <b-button size="sm" variant="light">Registrar</b-button>
-                    </b-col>
-                  </b-row>                 
-                  
-                </b-card-text>
-              </b-card>
+            <b-col col lg="6" sm="12" class="mt-1">
+              <DateCard :editable="false" time="18:30" :title="'Missa 18:30'">
+                Registro de pagamento de dízimo por missa
+              </DateCard>
             </b-col>
-            <b-col col lg="6" sm="12" class="mt-2">
+            <b-col col lg="6" sm="12" class="mt-1">
               <b-card bg-variant="danger" text-variant="white" header="Success" class="text-center">
                 <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
               </b-card>
@@ -180,6 +162,10 @@ import DateCard from 'components/DateCard'
 
       createDizimista() {
         this.$router.push({name: 'DIZIMISTAS_NEW'})
+      },
+
+      lancamentos(payload, time) {
+        console.log(payload, time)
       }
     }
   }

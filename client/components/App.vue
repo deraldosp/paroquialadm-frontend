@@ -41,6 +41,9 @@ export default {
     sidebarOpen() {
       return this.$store.state.sidebarOpen
     },
+    userMenu() {
+      return this.$store.state.userMenu
+    }
     
   },
 
@@ -80,21 +83,23 @@ export default {
 
   mounted() {
     this.defineDeviceDisplay()
-    window.addEventListener('click', () => {
-      this.$root.$emit('closeUserMenu')
-    })
 
     // verifica o token a cada 1 minuto
     this.tokenTimer = setInterval(() => {
       this.checkToken()
-    }, 60000)   
+    }, 60000)
+
+    window.addEventListener('click', () => {
+      if (this.userMenu) {
+        this.$root.$emit('closeUserMenu')
+      }
+    })
+
+
   },
   
   updated() {
     this.defineDeviceDisplay()
-    window.addEventListener('click', () => {
-      this.$root.$emit('closeUserMenu')
-    })
   },
 
   destroyed() {
