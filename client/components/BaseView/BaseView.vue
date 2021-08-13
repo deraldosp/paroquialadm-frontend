@@ -73,7 +73,7 @@ $bv_padding: 25;
 .base-view-body {
   height: calc(100vh - calc(80px + #{$bv_padding + 'px'}));
   width: 100%;
-  padding: 10px 0px;
+  padding: 10px 10px;
   overflow-y: auto !important;
   
   &.header-footer {

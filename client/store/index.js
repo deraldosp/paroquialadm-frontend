@@ -3,6 +3,9 @@ import Vuex from 'vuex'
 import i18n from '../config/I18n'
 import AuthService from 'services/auth.service'
 
+// modules
+import Dizimo from './modules/dizimo'
+
 Vue.use(Vuex)
 var authData
 
@@ -22,32 +25,43 @@ let getUserData = () => {
   return null
 }
 
-const state = {
-  count: 0,
-  lastRoutedPage: 'HOME',
-  sidebarOpen: false,
-  currentDeviceDisplay: 'desktop',
-  userMenu: false,
-  logged: loginState(),
-  user: getUserData(),
-  jwt: null,
-  languages: [
-    { 
-      lang: 'pt_br',
-      name: i18n.t('PORTUGUESE'),
-      brand: '/static/assets/images/brasil.png'
-    },
-    { 
-      lang: 'es',
-      name: i18n.t('SPANISH'),
-      brand: '/static/assets/images/espanha.png'
-    },
-    { 
-      lang: 'en',
-      name: i18n.t('ENGLISH'),
-      brand: '/static/assets/images/estados-unidos.png'
-    }
-  ]
+
+const modules = {
+  dizimo: Dizimo
+}
+
+
+
+
+
+const defaultState = () => {
+  return {
+    count: 0,
+    lastRoutedPage: 'HOME',
+    sidebarOpen: false,
+    currentDeviceDisplay: 'desktop',
+    userMenu: false,
+    logged: loginState(),
+    user: getUserData(),
+    jwt: null,
+    languages: [
+      { 
+        lang: 'pt_br',
+        name: i18n.t('PORTUGUESE'),
+        brand: '/static/assets/images/brasil.png'
+      },
+      { 
+        lang: 'es',
+        name: i18n.t('SPANISH'),
+        brand: '/static/assets/images/espanha.png'
+      },
+      { 
+        lang: 'en',
+        name: i18n.t('ENGLISH'),
+        brand: '/static/assets/images/estados-unidos.png'
+      }
+    ]
+  }
 }
 
 const mutations = {
@@ -132,9 +146,10 @@ const actions = {
 }
 
 const store = new Vuex.Store({
-  state,
+  state: defaultState(),
   mutations,
-  actions
+  actions,
+  modules
 })
 
 export default store

@@ -25,6 +25,7 @@ import { ValidationProvider, ValidationObserver, extend, configure, localize } f
 import BaseView from 'components/BaseView'
 import DatePick from 'vue-date-pick'
 
+
 import Luxon from 'root/plugins/Luxon'
 
 Vue.use(Luxon)
@@ -39,7 +40,7 @@ const components = [
   { name: 'ValidationObserver', path: ValidationObserver },
   { name: 'v-select', path: vSelect },
   { name: 'BaseView', path: BaseView },
-  { name: 'DatePick', path: DatePick }
+  { name: 'DatePick', path: DatePick },
 ]
 
 components.map(({ name, path }) => {

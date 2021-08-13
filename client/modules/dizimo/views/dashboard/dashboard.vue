@@ -18,7 +18,7 @@
         <div class="col-sm-12 col-lg-8 mb-3">
           <b-row>
             <b-col col xl="6" lg="12" sm="12" class="mt-1">
-              <DateCard @dateChanged="lancamentos" :editable="false" time="07:30" :title="'Missa 07:30'">
+              <DateCard @dateChanged="setEntries" :editable="false" time="07:30" :title="'Missa 07:30'">
                 Registro de pagamento de dízimo por missa
               </DateCard>
               
@@ -39,27 +39,11 @@
             </b-col>
             
             <b-col col lg="6" sm="12" class="mt-1">
-              <b-card bg-variant="success" text-variant="white" header="Lançamento Missa" class="text-center">
-                <b-card-text>
-                  <div>
-                    25/07/2021 - 18:30
-                  </div>
-                  <b-button size="sm" variant="light">Registrar</b-button>
-                </b-card-text>
-              </b-card>
-            </b-col>
-          
-           
-            <b-col col lg="6" sm="12" class="mt-1">
               <DateCard :editable="false" time="18:30" :title="'Missa 18:30'">
                 Registro de pagamento de dízimo por missa
               </DateCard>
             </b-col>
-            <b-col col lg="6" sm="12" class="mt-1">
-              <b-card bg-variant="danger" text-variant="white" header="Success" class="text-center">
-                <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
-              </b-card>
-            </b-col>
+        
           </b-row>
           <!-- <ButtonDashboard 
             @click="createDizimista()"
@@ -164,8 +148,11 @@ import DateCard from 'components/DateCard'
         this.$router.push({name: 'DIZIMISTAS_NEW'})
       },
 
-      lancamentos(payload, time) {
-        console.log(payload, time)
+      setEntries(obj) {
+        this.$store.dispatch('dizimo/setCurrentTimeEntries', obj).then(() =>{
+          this.$router.push({ name: "DIZIMO_ENTRIES", params: { date: obj.date, time: obj.time } })
+        })
+        console.log(obj)
       }
     }
   }

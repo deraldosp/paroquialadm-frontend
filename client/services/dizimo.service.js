@@ -18,5 +18,9 @@ export const Paroquianos = {
 
   delete: (id) => {
     return Service().delete(`${BaseUrl}/${id}`)
+  },
+
+  listSelect: () => {
+    return Service().get(`${BaseUrl}/list-select`)
   }
 }

@@ -5,6 +5,7 @@ import MainDizimo from 'modules/dizimo/views/mainDizimo'
 import Dizimistas from 'modules/dizimo/views/dizimistas'
 import DizimoDashboard from 'modules/dizimo/views/dashboard'
 import DizimistasEdit from 'root/views/Paroquianos/EditFormParoquiano'
+import DizimoEntries from 'modules/dizimo/views/DizimoEntries'
 
 import MainBatismo from 'modules/batismo/views/mainBatismo'
 import BatismoAgenda from 'modules/batismo/views/Agenda'
@@ -80,6 +81,13 @@ export default new Router({
           props: true,
           beforeEnter: guard
         },
+        {
+          path: '/dizimo/entries/:date/:time',
+          component: DizimoEntries,
+          name: 'DIZIMO_ENTRIES',
+          props: true,
+          beforeEnter: guard
+        }
       ]
     },
     {

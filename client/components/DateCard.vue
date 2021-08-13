@@ -34,7 +34,7 @@
           </template>
           
           
-          <div class="card-text text-right mt-auto align-self-end"><b-button @click="handleDate()" variant="primary" size="sm">Iniciar</b-button></div>
+          <div v-if="!noAction" class="card-text text-right mt-auto align-self-end"><b-button @click="handleDate()" variant="primary" size="sm">Iniciar</b-button></div>
         </div>
       </div>
     </div>
@@ -70,6 +70,10 @@
           // O valor precisa corresponder a alguma dessas Strings
           return ['success', 'warning', 'danger', 'primary', 'secondary'].indexOf(value) !== -1
         }
+      },
+      noAction: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -110,8 +114,8 @@
       handleDate() {
         let time = this.time? ` ${this.time}` : DateTime.now().toFormat('HH:mm')
         let payload = {
-          date: this.date.toFormat(`yyyy-MM-dd`),
-          time: time
+          date: this.date.toFormat(`yyyy-MM-dd`).trim(),
+          time: time.trim()
         }
         this.$emit('dateChanged', payload)
       }
@@ -143,7 +147,7 @@
   }
 }
 .card-body {
-  min-height: 150px;
+  min-height: 100px;
 }
 
 </style>

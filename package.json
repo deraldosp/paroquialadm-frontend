@@ -53,6 +53,7 @@
     "luxon": "^2.0.2",
     "promise-polyfill": "^6.0.2",
     "tslib": "^2.3.0",
+    "v-money": "^0.8.1",
     "vee-validate": "^3.4.10",
     "vue": "^2.6.0",
     "vue-apexcharts": "^1.6.1",
