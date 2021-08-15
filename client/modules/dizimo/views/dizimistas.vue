@@ -29,6 +29,10 @@
               <span @click="editParoquiano(item.id)" class="fas fa-edit"></span>
             </b-button>
           </template>
+
+
+
+          
           </b-table>
           <infinite-loading :identifier="resetState" @infinite="infiniteHandler"></infinite-loading>
         </div>
