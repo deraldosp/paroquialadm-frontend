@@ -1,0 +1,65 @@
+<template>
+  <div class="sidebar-right" :class="{'active': active}">
+    <div class="container">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      
+    },
+
+    data() {
+      return {
+        active: false
+      }
+    },
+
+    mounted() {
+      document.addEventListener('keydown', (e) => {
+        if((e.key=='Escape'||e.key=='Esc')){
+          this.close()
+          console.log(e)
+          e.preventDefault();
+          return false;
+        }
+      }).bind(this)
+    },
+
+    methods: {
+      show() {
+        this.active = true
+      },
+
+      close() {
+        this.active = false
+        this.$emit('closed')
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+.sidebar-right{
+	width: 370px;
+  margin-right: -370px;
+  position: fixed !important;
+  height: 100vh;
+	top: 0px;
+	right: -370px;
+	transition: all 0.3s cubic-bezier(0.26, 0.26, 0.26, 0.26);
+	z-index: 999;
+  background-color: rgb(255, 255, 255);
+  -webkit-box-shadow: -3px 2px 12px 0px rgba(0,0,0,0.27); 
+  box-shadow: -3px 2px 12px 0px rgba(0,0,0,0.27);
+
+  &.active{
+    right: 0px;
+    margin-right: 0px !important;
+    transition: all 0.3s cubic-bezier(0.26, 0.26, 0.26, 0.26);
+  }
+}
+</style>

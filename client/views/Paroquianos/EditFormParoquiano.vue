@@ -39,7 +39,7 @@
         <div class="col-lg-9 col-sm-12">
           <div class="pl-2">
             <ValidationObserver ref="observer">
-              <div v-show="activeNavItem == 1">
+              <div class="container" v-show="activeNavItem == 1">
 
                 <div class="row mt-3">
                   <div class="col-lg-4 col-sm-12">
@@ -60,12 +60,6 @@
                     <b-form-checkbox v-model="form.sortition_participant" switch size="lg"></b-form-checkbox>
                   </div>
 
-                  <div class="col-lg-2 col-sm-5">
-                    <div class="badge badge-secondary badge-pill" style="width: 100px">
-                      <!-- <h4 class="my-2"># {{ id }}</h4> -->
-                    </div>
-
-                  </div>
                 </div>
                 
                 <div class="row mt-3">
@@ -82,6 +76,7 @@
                     <ValidationProvider :name="$t('BIRTH_DAY')" rules="required" v-slot="{ errors }">
                     <div>
                       <date-pick
+                          class="w-100"
                           v-model="form.birth"
                           :displayFormat="dateDisplayFormat"
                       ></date-pick>
@@ -93,7 +88,8 @@
 
 
                  <div class="row mt-3">
-                   <div class="col-lg-4 col-sm-12">
+                  
+                  <div class="col-lg-4 col-sm-12">
                     <label for="">{{ $t('GENDER') }}</label>
                     <v-select :options="genders" v-model="form.gender" :reduce="item => item.value"></v-select>
                   </div>
@@ -110,6 +106,7 @@
                     <ValidationProvider :name="$t('WEDDING_DATE')" rules="required_if:marital_status,2" v-slot="{ errors }">
                     <div>
                       <date-pick
+                          class="w-100"
                           v-model="form.wedding_date"
                           :displayFormat="dateDisplayFormat"
                       ></date-pick>
@@ -119,8 +116,19 @@
                   </div>
                 </div>
 
+                <div class="row">
+                  <div class="col-lg-4 col-sm-12">
+                    <label for="">{{ $t('ZIP') }}</label>
+                    <ValidationProvider :name="$t('ZIP')" rules="required" v-slot="{ errors }">
+                      <b-form-input @blur="getPostalCode(form.zip)" v-model="form.zip"></b-form-input>
+                      <small class="text-danger">{{ errors[0] }}</small>
+                    </ValidationProvider>
+                  </div>
+                </div>
+
                 <div class="row mt-3">
-                  <div class="col-lg-8 col-sm-12">
+                                    
+                  <div class="col-lg-7 col-sm-12">
                     <label for="">{{ $t('ADDRESS_1') }}</label>
                     <ValidationProvider :name="$t('ADDRESS_1')" rules="required" v-slot="{ errors }">
                       <b-form-input v-model="form.address_1"></b-form-input>
@@ -128,37 +136,29 @@
                     </ValidationProvider>
                   </div>
 
-                  <div class="col-lg-4 col-sm-12">
+                  <div class="col-lg-2 col-sm-12">
                     <label for="">{{ $t('ADDRESS_NUMBER') }}</label>
                     <ValidationProvider :name="$t('ADDRESS_NUMBER')" rules="required" v-slot="{ errors }">
-                      <b-form-input v-model="form.address_number"></b-form-input>
+                      <b-form-input ref="number" v-model="form.address_number"></b-form-input>
                       <small class="text-danger">{{ errors[0] }}</small>
                     </ValidationProvider>
                   </div>
-                </div>
 
-                <div class="row mt-3">
-                  <div class="col-lg-4 col-sm-12">
+                  <div class="col-lg-3 col-sm-12">
                     <label for="">{{ $t('ADDRESS_2') }}</label>
                     <b-form-input v-model="form.address_2"></b-form-input>        
                   </div>
 
-                  <div class="col-lg-4 col-sm-12">
+                </div>
+
+                
+                <div class="row mt-3">
+                   <div class="col-lg-4 col-sm-12">
                     <label for="">{{ $t('DISTRICT') }}</label>
                     <b-form-input v-model="form.district"></b-form-input>
                   </div>
 
                   <div class="col-lg-4 col-sm-12">
-                    <label for="">{{ $t('ZIP') }}</label>
-                    <ValidationProvider :name="$t('ZIP')" rules="required" v-slot="{ errors }">
-                      <b-form-input v-model="form.zip"></b-form-input>
-                      <small class="text-danger">{{ errors[0] }}</small>
-                    </ValidationProvider>
-                  </div>
-                </div>
-
-                <div class="row mt-3">
-                  <div class="col-lg-5 col-sm-12">
                     <label for="">{{ $t('STATE') }}</label>
                     <v-select 
                       :options="states" 
@@ -166,16 +166,18 @@
                       label="name" 
                       :reduce="item => item.abbreviation"
                       @input="getCities"
+                      :clearable="false"
                       ></v-select>
                   </div>
 
-                  <div class="col-lg-7 col-sm-12">
+                  <div class="col-lg-4 col-sm-12">
                     <label for="">{{ $t('CITY') }}</label>
                     <v-select 
                       :options="cities" 
                       v-model="form.city" 
                       label="name" 
                       :reduce="item => item.name"
+                      :clearable="false"
                       ></v-select>
                   </div>
                 </div>
@@ -207,12 +209,14 @@
         </div>
       </div>
     </BaseView>
+
   </div>
 </template>
 
 <script>
   import { Geo } from 'services/general.service'
   import { Paroquianos } from 'services/dizimo.service'
+  import Axios from 'axios'
 
   export default {
     props: {
@@ -411,9 +415,43 @@
               }
             })
           }
+        })
+      },
 
+      getPostalCode(cep) {
 
+        if (!cep) {
+          return
+        }
 
+        let headers = { 
+          "Accept": "application/json"
+        }
+
+        Axios.get(`https://viacep.com.br/ws/${cep}/json/`, { headers }).then(res => {
+          if (res.status == 200 && !res.data.erro) {
+            const { data: address } = res
+  
+            this.form.address_1 = address.logradouro
+            this.form.address_2 = address.complemento
+            this.form.city = address.localidade
+            this.form.district = address.bairro
+            this.form.state = address.uf
+
+            this.$refs.number.$el.focus()
+          } 
+
+//           bairro: "Vila Catupia"
+// cep: "02933-080"
+// complemento: ""
+// ddd: "11"
+// gia: "1004"
+// ibge: "3550308"
+// localidade: "São Paulo"
+// logradouro: "Rua Tapendi"
+// siafi: "7107"
+// uf: "SP"
+          console.log(res.data)
         })
       }
     }
