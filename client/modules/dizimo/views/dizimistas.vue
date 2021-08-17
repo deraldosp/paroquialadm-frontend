@@ -39,21 +39,27 @@
       </b-container>
     </BaseView>
     
-    <Sidebar @closed="clearSelected" ref="sidebar" :active="showSidebar">
-      {{ selectedDizimista }}
-    </Sidebar>
+    <SidebarRight @closed="clearSelected" title="Cadastro de Dizimista" ref="sidebar" :active="showSidebar">
+      <FormDizimistaSidebar 
+        v-if="!isEmpty(selectedDizimista)" 
+        :form="selectedDizimista"
+      ></FormDizimistaSidebar>
+    </SidebarRight>
   </div>
   
 </template>
 
 <script>
   import { Paroquianos } from 'services/dizimo.service'
-  import Sidebar from 'components/Sidebar'
+  import SidebarRight from 'components/SidebarRight'
+  import FormDizimistaSidebar from './FormDizimistaSidebar'
+  import { isEmpty } from 'lodash'
 
   export default {
     components: {
       Paroquianos,
-      Sidebar
+      SidebarRight,
+      FormDizimistaSidebar
     },
 
     data() {
@@ -64,7 +70,8 @@
         resetState: 0,
         filter: {},
         selectedDizimista: null,
-        showSidebar: false
+        showSidebar: false,
+        isEmpty: isEmpty
       }
     },
 
@@ -162,9 +169,9 @@
       },
 
       selectDizimista(item) {
-        this.selectedDizimista = item.shift()
+        this.selectedDizimista = item.shift() || {}
         this.$nextTick(() => {
-          if (this.selectedDizimista !== undefined) {
+          if (!isEmpty(this.selectedDizimista)) {
             this.$refs.sidebar.show()
           } else {
             this.$refs.sidebar.close()
