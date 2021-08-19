@@ -13,7 +13,6 @@ import '../static/assets/scss/main.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import vSelect from 'vue-select'
-import "vue-select/src/scss/vue-select.scss";
 
 import Notifications from './plugins/notifications'
 

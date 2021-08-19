@@ -113,7 +113,10 @@ export default {
 
 <style lang="scss">
 @import 'static/assets/scss/bootstrap/_variables.scss';
+@import 'static/assets/scss/vue-select/_variables.scss';
+@import 'vue-select/src/scss/vue-select.scss';
 @import 'bootstrap/scss/bootstrap.scss';
+
 body {
   margin: 0;
   font-size: 0.95rem;

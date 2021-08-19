@@ -156,7 +156,7 @@ body::before {
   width: 80px;
   box-sizing: border-box;
   background-color: #fff;
-  z-index: 999;
+  z-index: 1000;
   border-radius: 0px 15px 15px 0px;
   -webkit-box-shadow: 6px -2px 18px 0px rgba(112, 112, 112, 0.15);
   box-shadow: 6px -2px 18px 0px rgba(112, 112, 112, 0.15);

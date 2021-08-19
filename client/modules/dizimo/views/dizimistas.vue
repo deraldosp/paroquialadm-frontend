@@ -39,8 +39,18 @@
       </b-container>
     </BaseView>
     
-    <SidebarRight @closed="clearSelected" title="Cadastro de Dizimista" ref="sidebar" :active="showSidebar">
-      <FormDizimistaSidebar 
+    <SidebarRight @closed="clearSelected"  ref="sidebar" :active="showSidebar">
+      <template #title>
+        <div class="d-flex">
+          <h5>Cadastro de Dizimista <span class="badge badge-secondary">#{{ selectedDizimista.code }}</span></h5>
+          <button @click="toggleEdit()" class="btn btn-light p-0 ml-2">
+            <span class="material-icons-outlined" :class="{'text-success': editMode}">mode_edit</span>
+          </button>
+        </div>
+        
+      </template>
+      <FormDizimistaSidebar
+        :editable="editMode"
         v-if="!isEmpty(selectedDizimista)" 
         :form="selectedDizimista"
       ></FormDizimistaSidebar>
@@ -71,7 +81,8 @@
         filter: {},
         selectedDizimista: null,
         showSidebar: false,
-        isEmpty: isEmpty
+        isEmpty: isEmpty,
+        editMode: false
       }
     },
 
@@ -115,7 +126,7 @@
             }
           ]
         }
-      }
+      },
     },
 
     mounted() {
@@ -182,11 +193,17 @@
 
       clearSelected() {
         this.$refs.table.clearSelected()
+      },
+
+      toggleEdit() {
+        this.editMode = !this.editMode
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
+  .btn-edit{
+    cursor: pointer;
+  }
 </style>

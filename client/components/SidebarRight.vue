@@ -56,12 +56,12 @@
 
 <style lang="scss" scoped>
 .sidebar-right{
-	width: 370px;
-  margin-right: -370px;
+	width: 400px;
+  margin-right: -400px;
   position: fixed !important;
   height: 100vh;
 	top: 0px;
-	right: -370px;
+	right: -400px;
 	transition: all 0.3s cubic-bezier(0.26, 0.26, 0.26, 0.26);
 	z-index: 999;
   overflow: auto;
