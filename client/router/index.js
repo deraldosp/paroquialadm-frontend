@@ -10,6 +10,11 @@ import DizimoEntries from 'modules/dizimo/views/DizimoEntries'
 import MainBatismo from 'modules/batismo/views/mainBatismo'
 import BatismoAgenda from 'modules/batismo/views/Agenda'
 import MainFinanceiro from 'modules/financeiro/views/mainFinanceiro'
+
+import MainSettings from 'modules/system/views/mainSettings'
+import SystemSettings from 'modules/system/views/systemSettings'
+import DbIntegrations from 'modules/system/views/integrations'
+
 import Login from 'views/Login'
 import Store from '../store'
 import loginExpires from 'root/helpers/CheckJwtExpires'
@@ -24,7 +29,7 @@ const isAuthenticated = () => {
 const guard = (to, from , next) => {
   if (to.name !== 'LOGIN' && !isAuthenticated()) next({ name: 'LOGIN' })
   // if the user is not authenticated, `next` is called twice
-  console.log(from)
+  // console.log(from)
   Store.dispatch('setLastPage', from.name)
   next()
 }
@@ -45,7 +50,6 @@ export default new Router({
       name: 'LOGIN',
       path: '/login',
       component: Login,
-      name: 'LOGIN',
     },
     {
       path: '/dizimo',
@@ -102,7 +106,6 @@ export default new Router({
       name: 'MAIN_BATISMO',
       path: '/batismo',
       component: MainBatismo,
-      children: [],
       beforeEnter: guard,
       redirect: '/batismo/agenda',
       children: [
@@ -110,9 +113,29 @@ export default new Router({
           name: 'DASHBOARD_BATISMO',
           path: '/batismo/agenda',
           component: BatismoAgenda,
-          name: 'DASHBOARD_BATISMO',
           beforeEnter: guard
         
+        }
+      ]
+    },
+    {
+      name: 'MAIN_SETTINGS',
+      path: '/sistema',
+      component: MainSettings,
+      beforeEnter: guard,
+      redirect: '/sistema/configuracoes',
+      children: [
+        {
+          name: 'SYSTEM_SETTINGS',
+          path: '/sistema/configuracoes',
+          component: SystemSettings,
+          beforeEnter: guard
+        },
+        {
+          name: 'DB_INTEGRATIONS',
+          path: '/sistema/dbIntegrations',
+          component: DbIntegrations,
+          beforeEnter: guard
         }
       ]
     }

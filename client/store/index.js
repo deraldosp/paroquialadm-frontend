@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import i18n from '../config/I18n'
 import AuthService from 'services/auth.service'
+import { localize } from 'vee-validate'
 
 // modules
 import Dizimo from './modules/dizimo'
@@ -9,7 +10,7 @@ import Dizimo from './modules/dizimo'
 Vue.use(Vuex)
 var authData
 
-let loginState = () => {
+const loginState = () => {
   if (localStorage.getItem('authData')) {
     authData = localStorage.getItem('authData')
     return true
@@ -18,9 +19,12 @@ let loginState = () => {
   }
 }
 
-let getUserData = () => {
+const getUserData = () => {
   if (authData) {
-    return JSON.parse(atob(authData)).user
+    const userData = JSON.parse(atob(authData)).user
+    localize(userData.locale)
+    
+    return userData
   }
   return null
 }
@@ -79,7 +83,6 @@ const mutations = {
       .getComputedStyle(document.querySelector('body'), ':before')
       .getPropertyValue('content')
       .replace(/"/g, '')
-      console.log(currentDeviceDisplay)
       state.currentDeviceDisplay = currentDeviceDisplay
   },
   TOGGLE_USER_MENU (state, payload) {

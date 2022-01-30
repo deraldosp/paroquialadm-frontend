@@ -121,6 +121,23 @@
             routerName: 'MAIN_BATISMO',
             childrenVisible: false,
             children: []
+          },
+          {
+            name: 'Sistema',
+            label: 'Sistema',
+            icon: 'settings',
+            href: '/sistema',
+            routerName: 'CONFIGURACOES_SISTEMA',
+            childrenVisible: false,
+            children: [
+              {
+                name: 'Integrações',
+                label: 'Integrações DB',
+                icon: 'connect',
+                href: '/sistema/integracoesDb',
+                routerName: 'CONFIGURACOES_DASHBOARD'
+              },
+            ]
           }
         ]
       }

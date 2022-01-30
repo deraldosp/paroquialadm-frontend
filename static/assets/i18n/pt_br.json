@@ -39,5 +39,13 @@
   "ADD_TITHE": "Novo Dizimista",
   "YEAR": "Ano",
   "MONTH": "Mês",
-  "VALUE": "Valor"
+  "VALUE": "Valor",
+  "DRIVER": "Driver",
+  "HOST": "Servidor",
+  "PORT": "Porta",
+  "USERNAME": "Usuário",
+  "PASSWORD": "Senha",
+  "DB_INTEGRATION": "Integração com Banco de Dados",
+  "TEST_CONNECTION": "Testar Conexão",
+  "CANCEL": "Cancelar"
 }

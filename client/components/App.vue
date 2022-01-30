@@ -63,7 +63,6 @@ export default {
         let expires = parseJwt(localStorage.getItem('jwt')).exp
         let now = this.$DateTime.now().toFormat('X')
   
-        console.log('tetas',expires, now)
         let diff = expires - now
         
         // se diferença o timestamp do token e timestamp atual form menor que dois minutos
