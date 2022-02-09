@@ -1,4 +1,6 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
+@import url('/static/assets/css/vueDatePick.css'); // vue date-pick bootstrap custom
 
 // main scss
 $sidebar-size: '80px';
@@ -22,14 +24,46 @@ $default-padding: '15px';
 .material-icons-outlined.md-36 { font-size: 36px; }
 .material-icons-outlined.md-48 { font-size: 48px; }
 
+@mixin mobile-brandheader {
+  .brandheader {
+    margin-left: #{$sidebar-size};
+    padding-left: calc(#{$sidebar-size} + #{$default-padding}) !important;    
+  }
+
+  .pa-user-menu {
+    right: 10px;
+    // height: 100vh;
+    min-width: calc(100vw - calc(#{$sidebar-size} + 20px))
+  }  
+}
+
+body {
+	
+	overflow: hidden;
+	&::before {
+		content: "smartphone";
+		display: none;
+	}
+}
+
 .brandheader {
   height: #{$margin-top} ;
   width: 100vw;
   padding-left: calc(#{$sidebar-size + #{$default-padding}});
+  padding-right: 30px;
   position: fixed;
   top: 0;
-  right: 0;
+  right: 0 !important;
+  z-index: 999;
   background-color: #fff;
+  -webkit-box-shadow: 0px 2px 15px 5px rgba(112,112,112,0.15); 
+  box-shadow: 0px 2px 15px 5px rgba(112,112,112,0.15);
+  transition: all 0.2s linear;
+
+  &.menu-expanded {
+    padding-left: calc(#{$default-padding} + calc(#{$sidebar-size} + #{$menu-size}));
+  }
+  
 }
 
 .main-container {
@@ -40,6 +74,7 @@ $default-padding: '15px';
   background-color: #f2faff;
   transition: all 0.2s linear;
   padding: 20px;
+  overflow-y: auto;
   
   &.sidebar-visible {
     margin-left: #{$sidebar-size};
@@ -52,6 +87,58 @@ $default-padding: '15px';
   }
 }
 
+.pa-user-menu {
+  border-radius: 5px;
+  -webkit-box-shadow: -1px 10px 11px 4px rgba(0,0,0,0.23); 
+  box-shadow: -1px 10px 11px 4px rgba(0,0,0,0.23);
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  margin: 0px;
+  display: none;
+  list-style: none;
+  z-index: 2;
+  min-width: 360px;
+  will-change: opacity, transform;
+  opacity: 0;
+  visibility: visible;
+  transform: scale(0.95);
+  transition: visibility 0.2s cubic-bezier(0.2, 0.91, 0.85, 0.96) 0s, opacity 0.2s cubic-bezier(0.2, 0.91, 0.85, 0.96) 0s, transform 0.2s cubic-bezier(0.2, 0.91, 0.85, 0.96) 0s;
+
+  .user-menu-header {
+    // background-color: rgb(255, 102, 0);
+    padding-left: 15px;
+    font-size: 16px;
+    height: 80px;   
+  }
+
+  .user-menu-body {
+    padding: 0px 15px 25px 15px;
+    line-height: 1.6em;
+    
+  }
+  
+  .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    &:before {
+      content: '\e5cd';
+      font-family: "Material Icons";
+      font-size: 20px;
+      color: #464646;
+    };
+  }
+  
+  &.show {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
 .sidebar {
   padding: 10px;
   position: fixed;
@@ -63,7 +150,7 @@ $default-padding: '15px';
   width: #{$sidebar-size};
   box-sizing: border-box;
   background-color: #fff;
-  z-index: 999;
+  z-index: 1000;
   border-radius: 0px 15px 15px 0px;
   -webkit-box-shadow: 6px -2px 18px 0px rgba(112,112,112,0.15); 
   box-shadow: 6px -2px 18px 0px rgba(112,112,112,0.15);
@@ -71,7 +158,7 @@ $default-padding: '15px';
   transition: all 300ms ease 0s;
 
   &.available {
-    border-right: solid 1px #f8700075;
+    border-right: solid 1px #f870004b;
   }
 
   &.opened {
@@ -108,11 +195,97 @@ $default-padding: '15px';
 .pa-card { // pa = paroquial admin
   width: 100%;
   min-width: 120px;
-  height: 100%;
-  min-height: 80px;
-  border-radius: 12px;
-  background-color: #fff;
+  // height: 100%;
+  // min-height: 80px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
   padding: 15px;
-  -webkit-box-shadow: 6px 5px 18px 0px rgba(112,112,112,0.15); 
-  box-shadow: 6px 5px 18px 0px rgba(112,112,112,0.15);
+  -webkit-box-shadow: 6px 5px 18px 0px rgba(112,112,112,0.25); 
+  box-shadow: 6px 5px 18px 0px rgba(112,112,112,0.25);
+
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #fcfcfc;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    background-color: #fcfcfc;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #acacac;
+  }
+
+
+}
+
+@media (min-width: 1025px) {
+  body {
+    &::before {
+      content: "desktop";
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	body {
+		&::before {
+			content: "tablet";
+		}
+	}
+  
+}
+
+@media only screen and (max-width: 768px) {
+  
+  @include mobile-brandheader;
+
+  body {
+	
+    overflow: hidden;
+    &::before {
+      content: "smartphone";
+      display: none;
+    }
+  }
+
+  .main-container {
+        
+    &.sidebar-visible {
+      margin-left: #{$sidebar-size};
+      width: calc(100vw - #{$sidebar-size});
+  
+      &.menu-expanded {
+        margin-left: #{$sidebar-size};
+        width: calc(100vw - #{$sidebar-size});
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-device-width: 768px) {
+  .sidebar {
+    border-right: solid 1px #f870004b !important;
+  }
+
+  #btn-toggle {
+    opacity: 1 !important;
+  }
+
+    .main-container {
+        
+    &.sidebar-visible {
+      margin-left: #{$sidebar-size};
+      width: calc(100vw - #{$sidebar-size});
+  
+      &.menu-expanded {
+        margin-left: #{$sidebar-size};
+        width: calc(100vw - #{$sidebar-size});
+      }
+    }
+  }
+
 }

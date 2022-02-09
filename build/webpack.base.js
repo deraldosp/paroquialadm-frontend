@@ -28,7 +28,8 @@ module.exports = {
       root: path.join(__dirname, '../client'),
       components: path.join(__dirname, '../client/components'),
       modules: path.join(__dirname, '../client/modules'),
-      services: path.join(__dirname, '../client/services')
+      services: path.join(__dirname, '../client/services'),
+      helpers: path.join(__dirname, '../client/helpers')
     },
     modules: [
       _.cwd('node_modules'),
@@ -80,18 +81,7 @@ module.exports = {
       }
     ]),
     new webpack.DefinePlugin({
-      'process.env.ENVIRONMENT': JSON.stringify(process.env.ENVIRONMENT),
-      'process.env.HOST_API_V1': JSON.stringify(process.env.HOST_API_V1),
-      'process.env.HOST_GRAPHQL': JSON.stringify(process.env.HOST_GRAPHQL),
-      'process.env.DEFAULT_WORKSPACE': JSON.stringify(process.env.DEFAULT_WORKSPACE),
-      'process.env.PUSHER_KEY': JSON.stringify(process.env.PUSHER_KEY),
-      'process.env.PUSHER_DEBUG': JSON.stringify(process.env.PUSHER_DEBUG),
-      'process.env.PUSHER_CLUSTER': JSON.stringify(process.env.PUSHER_CLUSTER),
-      'process.env.HOST_INTERNAL_BUCKET': JSON.stringify(process.env.HOST_INTERNAL_BUCKET),
-      'process.env.CLIENT_ID': JSON.stringify(process.env.CLIENT_ID),
-      'process.env.CLIENT_SECRET': JSON.stringify(process.env.CLIENT_SECRET),
-      'process.env.GRANT_TYPE': JSON.stringify(process.env.GRANT_TYPE),
-      'process.env.DOMAIN_CONFIG': JSON.stringify(process.env.DOMAIN_CONFIG), 
+      'process.env.HOST_API': JSON.stringify(process.env.HOST_API),
     }),
   ],
   target: _.target

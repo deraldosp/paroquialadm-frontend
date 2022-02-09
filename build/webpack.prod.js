@@ -1,5 +1,6 @@
 'use strict'
 process.env.NODE_ENV = 'production'
+require('dotenv').config()
 
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')

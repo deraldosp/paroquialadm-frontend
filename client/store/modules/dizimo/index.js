@@ -1,11 +1,12 @@
-import state from './state'
-import mutation from '/mutation'
-import action from '/action'
+import defaultState from './state'
+import mutations from './mutations'
+import actions from './actions'
 
 const store = {
-  state,
-  mutation,
-  action
+  namespaced: true,
+  state: defaultState(),
+  mutations,
+  actions
 }
 
 export default store
