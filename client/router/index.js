@@ -51,7 +51,7 @@ export default new Router({
     },
     {
       name: 'LOGIN',
-      path: '/login',
+      path: '/paroquialadm-frontend/login',
       component: Login,
     },
     {
