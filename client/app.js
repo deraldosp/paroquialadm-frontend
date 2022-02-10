@@ -4,8 +4,10 @@ import App from './components/App'
 import router from './router'
 import store from './store'
 
-import 'jquery/src/jquery.js'
-window.$ = require('jquery')
+import jQuery from 'jquery'
+global.jQuery = jQuery
+// import 'jquery/src/jquery.js'
+window.$ = jQuery
 
 import 'bootstrap/dist/js/bootstrap.min.js'
 import { BootstrapVue, IconsPlugin, LayoutPlugin } from 'bootstrap-vue'
