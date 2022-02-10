@@ -1,23 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home'
-import MainDizimo from 'modules/dizimo/views/mainDizimo'
-import Dizimistas from 'modules/dizimo/views/dizimistas'
-import DizimoDashboard from 'modules/dizimo/views/dashboard'
-import DizimistasEdit from 'root/views/Paroquianos/EditFormParoquiano'
-import DizimoEntries from 'modules/dizimo/views/DizimoEntries'
+const MainDizimo = () => 
+  import(/* webpackChunkName: "mainDizimo" */'modules/dizimo/views/mainDizimo') 
 
-import MainBatismo from 'modules/batismo/views/mainBatismo'
-import BatismoAgenda from 'modules/batismo/views/Agenda'
-import MainFinanceiro from 'modules/financeiro/views/mainFinanceiro'
+const Dizimistas = () => import(/* webpackChunkName: "dizimistas" */'modules/dizimo/views/dizimistas')
+const DizimoDashboard = () => import(/* webpackChunkName: "dashboard" */ 'modules/dizimo/views/dashboard')
+const DizimistasEdit = () => import(/* webpackChunkName: "EditFormParoquiano" */ 'root/views/Paroquianos/EditFormParoquiano')
+const DizimoEntries = () => import(/* webpackChunkName: "DizimoEntries" */ 'modules/dizimo/views/DizimoEntries')
 
-import MainSettings from 'modules/system/views/mainSettings'
-import SystemSettings from 'modules/system/views/systemSettings'
-import DbIntegrations from 'modules/system/views/integrations'
+const MainBatismo = () => import(/* webpackChunkName: "mainBatismo" */ 'modules/batismo/views/mainBatismo')
+const BatismoAgenda = () => import(/* webpackChunkName: "Agenda" */ 'modules/batismo/views/Agenda')
+const MainFinanceiro = () => import(/* webpackChunkName: "mainFinanceiro" */ 'modules/financeiro/views/mainFinanceiro')
 
-import Login from 'views/Login'
+const MainSettings = () => import(/* webpackChunkName: "mainSettings" */ 'modules/system/views/mainSettings')
+const SystemSettings = () => import(/* webpackChunkName: "systemSettings" */ 'modules/system/views/systemSettings')
+const DbIntegrations = () => import(/* webpackChunkName: "integrations" */ 'modules/system/views/integrations')
+
+const Login = () => import(/* webpackChunkName: "Login" */ 'views/Login')
+
 import Store from '../store'
 import loginExpires from 'root/helpers/CheckJwtExpires'
+
 
 Vue.use(Router)
 
