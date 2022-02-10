@@ -28,8 +28,7 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
-      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}site/wwwroot
-    - name: 'Deploy to Azure WebApp'
+      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
