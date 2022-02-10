@@ -57,7 +57,7 @@ base.plugins.push(
     relativePaths: false,
     ServiceWorker: {
       events:true,
-      navigateFallbackURL: config.publicPath
+      navigateFallbackURL:'/'
     },
     AppCache: {
       events:true,
