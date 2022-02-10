@@ -45,9 +45,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_WEB_TOKEN }}
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "dist" # App source code path relative to repository root
+          app_location: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} # App source code path relative to repository root
           # api_location: "api" # Api source code path relative to repository root - optional
-          # output_location: "public" # Built app content directory, relative to app_location - optional
+          output_location: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}dist # Built app content directory, relative to app_location - optional
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
