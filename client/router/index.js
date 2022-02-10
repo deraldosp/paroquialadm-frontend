@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const Home = () => import(/* webpackChunkName: "Home" */'../views/Home.vue')
-const MainDizimo = () => import(/* webpackChunkName: "mainDizimo" */'modules/dizimo/views/mainDizimo/mainDizimo.vue') 
+const Home = () => import(/* webpackChunkName: "Home" */ '../views/Home.vue')
+const MainDizimo = () => import(/* webpackChunkName: "mainDizimo" */ 'modules/dizimo/views/mainDizimo/mainDizimo.vue') 
 
-const Dizimistas = () => import(/* webpackChunkName: "dizimistas" */'modules/dizimo/views/dizimistas.vue')
+const Dizimistas = () => import(/* webpackChunkName: "dizimistas" */ 'modules/dizimo/views/dizimistas.vue')
 const DizimoDashboard = () => import(/* webpackChunkName: "dashboard" */ 'modules/dizimo/views/dashboard/dashboard.vue')
 const DizimistasEdit = () => import(/* webpackChunkName: "EditFormParoquiano" */ 'root/views/Paroquianos/EditFormParoquiano.vue')
 const DizimoEntries = () => import(/* webpackChunkName: "DizimoEntries" */ 'modules/dizimo/views/DizimoEntries.vue')
