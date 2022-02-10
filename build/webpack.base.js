@@ -78,7 +78,7 @@ module.exports = {
       {
         from: _.cwd('./static'),
         // to the root of dist path deraldo
-        to: './static'
+        to: config.assetsPath
       }
     ]),
     new webpack.DefinePlugin({
