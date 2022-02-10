@@ -52,17 +52,17 @@ const defaultState = () => {
       { 
         lang: 'pt_br',
         name: i18n.t('PORTUGUESE'),
-        brand: '/static/assets/images/brasil.png'
+        brand: '../../../static/assets/images/brasil.png'
       },
       { 
         lang: 'es',
         name: i18n.t('SPANISH'),
-        brand: '/static/assets/images/espanha.png'
+        brand: '../../../static/assets/images/espanha.png'
       },
       { 
         lang: 'en',
         name: i18n.t('ENGLISH'),
-        brand: '/static/assets/images/estados-unidos.png'
+        brand: '../../../static/assets/images/estados-unidos.png'
       }
     ]
   }

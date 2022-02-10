@@ -33,7 +33,3 @@ import { localize } from 'vee-validate'
     }
   }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
