@@ -1,32 +1,69 @@
-name: deploy
+# File: .github/workflows/workflow.yml
+name: JavaScript CI
+
 on:
   push:
     branches:
       - master
+
+env:
+  AZURE_WEBAPP_NAME: padm-app   # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '/'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '14.x'                # set this to the node version to use
+
 jobs:
-  deploy:
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "14"
-      - name: setup git auth
-        env:
-          email: "deraldosp@gmail.com"
-          username: "${{secrets.USERNAME}}"
-          access_token: "${{secrets.ACCESS_TOKEN}}"
-        run: |
-          git config --global credential.helper store
-          echo "https://${{secrets.ACCESS_TOKEN}}:x-oauth-basic@github.com" > ~/.git-credentials
-          git config --global user.email $email
-          git config --global user.name $username
-      - name: deploy to pa-page
-        run: |
-          npm i
-          NODE_ENV=production npm run build
-          cd dist
-          git init
-          git add -A
-          git commit -m "🚀 Deploy id ${GITHUB_RUN_ID}"
-          git push -f "https://github.com/deraldosp/paroquialadm-frontend.git" master:gh-pages
+    - uses: actions/checkout@main
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install, build, and test
+      run: |
+        # Build and test the project, then
+        # deploy to Azure Web App.
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+      working-directory: my-app-path
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+# name: deploy
+# on:
+#   push:
+#     branches:
+#       - master
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: "14"
+#       - name: setup git auth
+#         env:
+#           email: "deraldosp@gmail.com"
+#           username: "${{secrets.USERNAME}}"
+#           access_token: "${{secrets.ACCESS_TOKEN}}"
+#         run: |
+#           git config --global credential.helper store
+#           echo "https://${{secrets.ACCESS_TOKEN}}:x-oauth-basic@github.com" > ~/.git-credentials
+#           git config --global user.email $email
+#           git config --global user.name $username
+#       - name: deploy to pa-page
+#         run: |
+#           npm i
+#           NODE_ENV=production npm run build
+#           cd dist
+#           git init
+#           git add -A
+#           git commit -m "🚀 Deploy id ${GITHUB_RUN_ID}"
+#           git push -f "https://github.com/deraldosp/paroquialadm-frontend.git" master:gh-pages
