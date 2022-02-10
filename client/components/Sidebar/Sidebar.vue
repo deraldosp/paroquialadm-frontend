@@ -2,8 +2,8 @@
   <div class="sidebar" :class="[{ 'available': availableMenu }, { 'opened': sidebarOpen }]">
     <div class="sidebar-logo d-flex justify-content-start align-items-center">
       <div class="container-logo" :class="{ 'extended': sidebarOpened }" @click="goToHome()">
-        <div v-show="sidebarOpened" class="brand-logo mt-n3"><img class="img-fluid" src="/static/assets/images/brasao-arquidiocese-extended.png" alt=""></div>
-        <div v-show="!sidebarOpened" class="brand-logo mt-n3"><img class="img-fluid" src="/static/assets/images/brasao-arquidiocese.png" alt=""></div>
+        <div v-show="sidebarOpened" class="brand-logo mt-n3"><img class="img-fluid" src="../../../static/assets/images/brasao-arquidiocese-extended.png" alt=""></div>
+        <div v-show="!sidebarOpened" class="brand-logo mt-n3"><img class="img-fluid" src="../../../static/assets/images/brasao-arquidiocese.png" alt=""></div>
       </div>
     </div>
     <span @click="toggleSidebar()" id="btn-toggle" class="d-flex align-items-center" :class="{ 'available': availableMenu }">

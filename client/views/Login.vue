@@ -8,7 +8,7 @@
 
             <div class="w-100 d-flex justify-content-center alig-items-center">
               <div style="width: 200px">
-                <img class="img-fluid" src="/static/assets/images/brasao-arquidiocese-extended.png" alt="">
+                <img class="img-fluid" src="../../static/assets/images/brasao-arquidiocese-extended.png" alt="">
               </div>
             </div>
             
