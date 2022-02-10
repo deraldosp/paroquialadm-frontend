@@ -8,11 +8,7 @@ name: Vue Web App
 on:
   push:
     branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+      - master
 
 env:
   AZURE_WEBAPP_NAME: paadm-web   # set this to your application's name
