@@ -5,23 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const config = require('./config')
 const _ = require('./utils')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 
 module.exports = {
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        chunkFilter: (chunk) => {
-          // Exclude uglification for the `vendor` chunk
-          if (chunk.name === 'vendor') {
-            return false;
-          }
- 
-          return true;
-        },
-      }),
-    ],
-  },
   entry: {
     client: './client/index.js'
   },
