@@ -14,6 +14,7 @@ env:
   AZURE_WEBAPP_NAME: paadm-web   # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: './'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '14.x'                # set this to the node version to use
+  HOST_API: "http://localhost:82/api"
 
 jobs:
   build_and_deploy_job:
@@ -21,20 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      # - uses: actions/checkout@main
-      # - name: Use Node.js ${{ env.NODE_VERSION }}
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: ${{ env.NODE_VERSION }}
-      # - name: npm install, build, and test
-      #   run: |
-      #     # Build and test the project, then
-      #     # deploy to Azure Web App.
-      #     npm install
-      #     npm run build --if-present
-      #     npm run test --if-present
-      #   working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-      
       - uses: actions/checkout@v2
         with:
           submodules: true
@@ -50,17 +37,17 @@ jobs:
           output_location: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}dist # Built app content directory, relative to app_location - optional
           ###### End of Repository/Build Configurations ######
 
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_WEB_TOKEN }}
-          action: "close"
+  # close_pull_request_job:
+  #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
+  #   runs-on: ubuntu-latest
+  #   name: Close Pull Request Job
+  #   steps:
+  #     - name: Close Pull Request
+  #       id: closepullrequest
+  #       uses: Azure/static-web-apps-deploy@v1
+  #       with:
+  #         azure_static_web_apps_api_token: ${{ secrets.AZURE_WEB_TOKEN }}
+  #         action: "close"
 
 # File: .github/workflows/workflow.yml
 # name: JavaScript CI
