@@ -16,7 +16,7 @@ const MainSettings = () => import(/* webpackChunkName: "mainSettings" */ 'module
 const SystemSettings = () => import(/* webpackChunkName: "systemSettings" */ 'modules/system/views/systemSettings/systemSettings.vue')
 const DbIntegrations = () => import(/* webpackChunkName: "integrations" */ 'modules/system/views/integrations')
 
-const Login = () => import(/* webpackChunkName: "Login" */ 'views/Login.vue')
+import Login from 'views/Login.vue'
 
 import Store from '../store'
 import loginExpires from 'root/helpers/CheckJwtExpires'
