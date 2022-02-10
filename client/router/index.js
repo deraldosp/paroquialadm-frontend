@@ -12,7 +12,7 @@ const MainBatismo = () => import(/* webpackChunkName: "mainBatismo" */ 'modules/
 const BatismoAgenda = () => import(/* webpackChunkName: "Agenda" */ 'modules/batismo/views/Agenda.vue')
 const MainFinanceiro = () => import(/* webpackChunkName: "mainFinanceiro" */ 'modules/financeiro/views/mainFinanceiro.vue')
 
-const MainSettings = () => import(/* webpackChunkName: "mainSettings" */ 'modules/system/views/mainSettings/mainSettings.vue')
+const MainSettings = () => import(/* webpackChunkName: "mainSettings" */ 'modules/system/views/mainSettings/MainSettings.vue')
 const SystemSettings = () => import(/* webpackChunkName: "systemSettings" */ 'modules/system/views/systemSettings/systemSettings.vue')
 const DbIntegrations = () => import(/* webpackChunkName: "integrations" */ 'modules/system/views/integrations')
 
