@@ -1,40 +1,66 @@
-# File: .github/workflows/workflow.yml
-name: JavaScript CI
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: Vue Web App
 
 on:
   push:
     branches:
       - master
 
-env:
-  AZURE_WEBAPP_NAME: paadm-app   # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: './'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14.x'                # set this to the node version to use
+pool:
+  vmImage: ubuntu-latest
 
-jobs:
-  build-and-deploy:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@main
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build, and test
-      run: |
-        # Build and test the project, then
-        # deploy to Azure Web App.
-        npm install
-        npm run build --if-present
-        npm run test --if-present
-      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}dist
+steps:
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: "./" 
+      api_location: "api"
+      output_location: "dist"
+    env:
+      azure_static_web_apps_api_token: ${{secrets.AZURE_WEB_TOKEN}}
+
+# File: .github/workflows/workflow.yml
+# name: JavaScript CI
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# env:
+#   AZURE_WEBAPP_NAME: paadm-web   # set this to your application's name
+#   AZURE_WEBAPP_PACKAGE_PATH: './'      # set this to the path to your web app project, defaults to the repository root
+#   NODE_VERSION: '14.x'                # set this to the node version to use
+
+# jobs:
+#   build-and-deploy:
+#     name: Build and Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@main
+#     - name: Use Node.js ${{ env.NODE_VERSION }}
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: ${{ env.NODE_VERSION }}
+#     - name: npm install, build, and test
+#       run: |
+#         # Build and test the project, then
+#         # deploy to Azure Web App.
+#         npm install
+#         npm run build --if-present
+#         npm run test --if-present
+#       working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+#     - name: 'Deploy to Azure WebApp'
+#       uses: AzureStaticWebApp@0
+#       with: 
+#         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+#         # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+#         publish-profile: ${{ secrets.AZURE_WEB_TOKEN }}
+#         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}dist
+      
 # name: deploy
 # on:
 #   push:
