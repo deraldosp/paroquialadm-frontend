@@ -1,23 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home'
-const MainDizimo = () => 
-  import(/* webpackChunkName: "mainDizimo" */'modules/dizimo/views/mainDizimo') 
+const Home = () => import(/* webpackChunkName: "Home" */'../views/Home.vue')
+const MainDizimo = () => import(/* webpackChunkName: "mainDizimo" */'modules/dizimo/views/mainDizimo/mainDizimo.vue') 
 
-const Dizimistas = () => import(/* webpackChunkName: "dizimistas" */'modules/dizimo/views/dizimistas')
-const DizimoDashboard = () => import(/* webpackChunkName: "dashboard" */ 'modules/dizimo/views/dashboard')
-const DizimistasEdit = () => import(/* webpackChunkName: "EditFormParoquiano" */ 'root/views/Paroquianos/EditFormParoquiano')
-const DizimoEntries = () => import(/* webpackChunkName: "DizimoEntries" */ 'modules/dizimo/views/DizimoEntries')
+const Dizimistas = () => import(/* webpackChunkName: "dizimistas" */'modules/dizimo/views/dizimistas.vue')
+const DizimoDashboard = () => import(/* webpackChunkName: "dashboard" */ 'modules/dizimo/views/dashboard/dashboard.vue')
+const DizimistasEdit = () => import(/* webpackChunkName: "EditFormParoquiano" */ 'root/views/Paroquianos/EditFormParoquiano.vue')
+const DizimoEntries = () => import(/* webpackChunkName: "DizimoEntries" */ 'modules/dizimo/views/DizimoEntries.vue')
 
-const MainBatismo = () => import(/* webpackChunkName: "mainBatismo" */ 'modules/batismo/views/mainBatismo')
-const BatismoAgenda = () => import(/* webpackChunkName: "Agenda" */ 'modules/batismo/views/Agenda')
-const MainFinanceiro = () => import(/* webpackChunkName: "mainFinanceiro" */ 'modules/financeiro/views/mainFinanceiro')
+const MainBatismo = () => import(/* webpackChunkName: "mainBatismo" */ 'modules/batismo/views/mainBatismo.vue')
+const BatismoAgenda = () => import(/* webpackChunkName: "Agenda" */ 'modules/batismo/views/Agenda.vue')
+const MainFinanceiro = () => import(/* webpackChunkName: "mainFinanceiro" */ 'modules/financeiro/views/mainFinanceiro.vue')
 
-const MainSettings = () => import(/* webpackChunkName: "mainSettings" */ 'modules/system/views/mainSettings')
-const SystemSettings = () => import(/* webpackChunkName: "systemSettings" */ 'modules/system/views/systemSettings')
+const MainSettings = () => import(/* webpackChunkName: "mainSettings" */ 'modules/system/views/mainSettings/mainSettings.vue')
+const SystemSettings = () => import(/* webpackChunkName: "systemSettings" */ 'modules/system/views/systemSettings/systemSettings.vue')
 const DbIntegrations = () => import(/* webpackChunkName: "integrations" */ 'modules/system/views/integrations')
 
-const Login = () => import(/* webpackChunkName: "Login" */ 'views/Login')
+const Login = () => import(/* webpackChunkName: "Login" */ 'views/Login.vue')
 
 import Store from '../store'
 import loginExpires from 'root/helpers/CheckJwtExpires'
