@@ -14,7 +14,7 @@ env:
   AZURE_WEBAPP_NAME: paadm-web   # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: './'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '14.x'                # set this to the node version to use
-  HOST_API: "http://localhost:82/api"
+  HOST_API: "http://172.20.92.198:82/api"
 
 jobs:
   build_and_deploy_job:
