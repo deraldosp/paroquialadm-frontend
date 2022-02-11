@@ -3,13 +3,14 @@ import { sync } from 'vuex-router-sync'
 import App from './components/App'
 import router from './router'
 import store from './store'
+import 'bootstrap/dist/js/bootstrap.bundle'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import jQuery from 'jquery'
 global.jQuery = jQuery
 // import 'jquery/src/jquery.js'
 window.$ = jQuery
 
-import 'bootstrap/dist/js/bootstrap.min.js'
 import { BootstrapVue, IconsPlugin, LayoutPlugin } from 'bootstrap-vue'
 import '../static/assets/scss/main.scss'
 import 'bootstrap-vue/dist/bootstrap-vue.css'

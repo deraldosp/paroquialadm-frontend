@@ -198,9 +198,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .btn-edit{
-    cursor: pointer;
-  }
-</style>
